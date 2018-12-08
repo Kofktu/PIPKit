@@ -1,0 +1,16 @@
+PODS:
+  - PIPKit (0.0.1)
+
+DEPENDENCIES:
+  - PIPKit (from `../`)
+
+EXTERNAL SOURCES:
+  PIPKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PIPKit: bced201c6b907bbc825d02b319f463a040ed6991
+
+PODFILE CHECKSUM: c08b7c7c692e22463a8585bf1d49708f9b5678bc
+
+COCOAPODS: 1.6.0.beta.2
