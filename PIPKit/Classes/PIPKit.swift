@@ -19,7 +19,7 @@ public final class PIPKit {
     
     static public var isPIP: Bool { return state == .pip }
     
-    static private var state: _PIPState = .none
+    static internal var state: _PIPState = .none
     static private var rootViewController: PIPKitViewController?
     
     public class func show(with viewController: PIPKitViewController, completion: (() -> Void)? = nil) {
@@ -27,18 +27,19 @@ public final class PIPKit {
             return
         }
         
-        guard !PIPKit.isPIP else {
+        guard rootViewController == nil else {
             dismiss(animated: false) {
                 PIPKit.show(with: viewController)
             }
             return
         }
         
-        PIPKit.rootViewController = viewController
+        rootViewController = viewController
+        state = (viewController.initialState == .pip) ? .pip : .full
+        
         viewController.view.alpha = 0.0
-        viewController.setInitialFrame(with: window.frame.size)
-        viewController.setupEventDispatcher()
         window.addSubview(viewController.view)
+        viewController.setupEventDispatcher()
         
         UIView.animate(withDuration: 0.25, animations: {
             PIPKit.rootViewController?.view.alpha = 1.0
@@ -48,11 +49,32 @@ public final class PIPKit {
     }
     
     public class func dismiss(animated: Bool, completion: (() -> Void)? = nil) {
-        PIPKit.state = .exit
-        rootViewController?.dismiss(animated: animated, completion: {
+        state = .exit
+        rootViewController?.pipDismiss(animated: animated, completion: {
             PIPKit.reset()
             completion?()
         })
+    }
+    
+    // MARK: - Internal
+    class func startPIPMode() {
+        guard let rootViewController = rootViewController else {
+            return
+        }
+        
+        // PIP
+        state = .pip
+        rootViewController.pipEventDispatcher?.enterPIP()
+    }
+    
+    class func stopPIPMode() {
+        guard let rootViewController = rootViewController else {
+            return
+        }
+        
+        // fullScreen
+        state = .full
+        rootViewController.pipEventDispatcher?.enterFullScreen()
     }
     
     // MARK: - Private
