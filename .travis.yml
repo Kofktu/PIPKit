@@ -7,7 +7,7 @@ env:
   - SDK="iphoneos12.0"
 
 script:
-- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/Example.xcworkspace -scheme Example ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/Example.xcworkspace -scheme Example ONLY_ACTIVE_ARCH=NO clean build -sdk $SDK -configuration Debug CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO | xcpretty
 
 before_install:
   - xcodebuild -showsdks
