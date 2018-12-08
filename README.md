@@ -53,12 +53,6 @@ class PIPKit {
     class func show(with viewController: PIPKitViewController, completion: (() -> Void)? = nil) 
     class func dismiss(animated: Bool, completion: (() -> Void)? = nil)
 }
-
-class PIPViewController: UIViewController, PIPUsable {}
-func show() {
-    let viewController = PIPViewController()
-    PIPKit.show(with: viewController)
-}
 ```
 
 #### PIPKitViewController (UIViewController & PIPUsable)
