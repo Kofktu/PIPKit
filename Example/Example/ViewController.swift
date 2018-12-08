@@ -11,17 +11,58 @@ import PIPKit
 
 class ViewController: UIViewController {
 
+    class func viewController() -> ViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController else {
+            fatalError("ViewController is null")
+        }
+        return viewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        title = "PIPKit"
+    }
+    
+    // MARK: - Private
+    private func setupDismissNavigationItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                           target: self,
+                                                           action: #selector(onDismiss(_:)))
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
+    // MARK: - Action
+    @objc
+    private func onDismiss(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction private func onPIPViewController(_ sender: UIButton) {
         PIPKit.show(with: PIPViewController())
-//        PIPKit.show(with: PIPXibViewController.viewController())
     }
-
+    
+    @IBAction private func onPIPViewControllerWithXib(_ sender: UIButton) {
+        PIPKit.show(with: PIPXibViewController.viewController())
+    }
+    
+    @IBAction private func onPIPDismiss() {
+        PIPKit.dismiss(animated: true)
+    }
+    
+    @IBAction private func onPushViewController(_ sender: UIButton) {
+        let viewController = ViewController.viewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction private func onPresentViewController(_ sender: UIButton) {
+        let viewController = ViewController.viewController()
+        let naviController = UINavigationController(rootViewController: viewController)
+        present(naviController, animated: true) { [unowned viewController] in
+            viewController.setupDismissNavigationItem()
+        }
+    }
 }
 
 class PIPViewController: UIViewController, PIPUsable {

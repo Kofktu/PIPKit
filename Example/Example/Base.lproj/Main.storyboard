@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Obs-UQ-O6r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,16 +13,69 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Og4-Ua-Tiw">
+                                <rect key="frame" x="95.5" y="270.5" width="184" height="190"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGb-AU-Wbl">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="30"/>
+                                        <state key="normal" title="PIPViewController"/>
+                                        <connections>
+                                            <action selector="onFullAndPIP:" destination="cFI-iO-Q4k" eventType="touchUpInside" id="RGW-bg-tGz"/>
+                                            <action selector="onPIPViewController:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ex2-cv-5nQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdg-Ex-2ZN">
+                                        <rect key="frame" x="0.0" y="40" width="184" height="30"/>
+                                        <state key="normal" title="PIPViewController with XIB"/>
+                                        <connections>
+                                            <action selector="onPIPViewControllerWithXib:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wgj-hc-DED"/>
+                                            <action selector="onUpdatePIPSize:" destination="cFI-iO-Q4k" eventType="touchUpInside" id="ynj-cn-D72"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qo4-ep-YHx">
+                                        <rect key="frame" x="0.0" y="80" width="184" height="30"/>
+                                        <state key="normal" title="PIP.dismiss"/>
+                                        <connections>
+                                            <action selector="onDismiss:" destination="cFI-iO-Q4k" eventType="touchUpInside" id="aSW-za-FAl"/>
+                                            <action selector="onPIPDismiss" destination="BYZ-38-t0r" eventType="touchUpInside" id="dBf-Z6-y4m"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-9u-ZVv">
+                                        <rect key="frame" x="0.0" y="120" width="184" height="30"/>
+                                        <state key="normal" title="PushViewController"/>
+                                        <connections>
+                                            <action selector="onDismiss:" destination="cFI-iO-Q4k" eventType="touchUpInside" id="W8b-bz-B5T"/>
+                                            <action selector="onPushViewController:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qin-1P-chG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qcj-z2-fn2">
+                                        <rect key="frame" x="0.0" y="160" width="184" height="30"/>
+                                        <state key="normal" title="PresentViewController"/>
+                                        <connections>
+                                            <action selector="onDismiss:" destination="cFI-iO-Q4k" eventType="touchUpInside" id="5iX-hC-qGZ"/>
+                                            <action selector="onPresentViewController:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8iB-hc-rfs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Og4-Ua-Tiw" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="4Is-0G-ZgT"/>
+                            <constraint firstItem="Og4-Ua-Tiw" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="vp9-pC-kLv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="00r-tb-l1G"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="81" y="26"/>
         </scene>
         <!--Xib View Controller-->
         <scene sceneID="Bj5-jH-hUU">
@@ -70,6 +123,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JXq-wl-t1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="737" y="26"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dir-CX-rp6">
+            <objects>
+                <navigationController id="Obs-UQ-O6r" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wqu-Nb-IdH">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ta7-m4-bB5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Gp-br-HPH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-646" y="26"/>
         </scene>
     </scenes>
 </document>

@@ -27,11 +27,6 @@ final class PIPKitEventDispatcher {
     private lazy var transitionGesture: UIPanGestureRecognizer = {
         UIPanGestureRecognizer(target: self, action: #selector(onTransition(_:)))
     }()
-    private lazy var hangAroundGesture: UIPanGestureRecognizer = {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(onTransition(_:)))
-        gesture.isEnabled = false
-        return gesture
-    }()
     
     private var startOffset: CGPoint = .zero
     private var pipPosition: PIPPosition = .bottomRight
@@ -50,16 +45,13 @@ final class PIPKitEventDispatcher {
         
         switch rootViewController.initialState {
         case .full:
-            willEnterFullScreen()
             didEnterFullScreen()
         case .pip:
-            willEnterPIP()
             didEnterPIP()
         }
     }
     
     func enterFullScreen() {
-        willEnterFullScreen()
         UIView.animate(withDuration: 0.25, animations: { [weak self] in
             self?.updateFrame()
         }) { [weak self] (_) in
@@ -68,7 +60,6 @@ final class PIPKitEventDispatcher {
     }
 
     func enterPIP() {
-        willEnterPIP()
         UIView.animate(withDuration: 0.25, animations: { [weak self] in
             self?.updateFrame()
         }) { [weak self] (_) in
@@ -91,6 +82,7 @@ final class PIPKitEventDispatcher {
             break
         }
         
+        rootViewController.view.setNeedsLayout()
         rootViewController.view.layoutIfNeeded()
     }
 
@@ -98,7 +90,6 @@ final class PIPKitEventDispatcher {
     // MARK: - Private
     private func commonInit() {
         rootViewController?.view.addGestureRecognizer(transitionGesture)
-        rootViewController?.view.addGestureRecognizer(hangAroundGesture)
         
         deviceNotificationObserver = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification,
                                                                             object: nil,
@@ -112,20 +103,12 @@ final class PIPKitEventDispatcher {
         }
     }
     
-    private func willEnterFullScreen() {
-        hangAroundGesture.isEnabled = false
-    }
-    
     private func didEnterFullScreen() {
-        transitionGesture.isEnabled = true
-    }
-    
-    private func willEnterPIP() {
         transitionGesture.isEnabled = false
     }
     
     private func didEnterPIP() {
-        hangAroundGesture.isEnabled = true
+        transitionGesture.isEnabled = true
     }
     
     private func updatePIPFrame() {
