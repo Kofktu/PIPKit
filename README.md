@@ -6,8 +6,8 @@
 
 - Picture in Picture for iOS (iPhone, iPad)
 
-<img src="/Screenshot/default.gif" width="40%" alt="default">
-<img src="/Screenshot/transition.gif" width="40%" alt="transition">
+![pip_default](/Screenshot/default.gif)
+![pip_transition](/Screenshot/transition.gif)
 
 ## Requirements
 - iOS 8.0+
@@ -75,7 +75,7 @@ PIPKit.dismiss(animated: true)
 
 #### Update PIPSize
 
-![alt tag](Screenshot/resize.gif)
+![pip_resize](/Screenshot/resize.gif)
 
 ```swift
 class PIPViewController: UIViewController, PIPUsable {
