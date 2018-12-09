@@ -6,8 +6,8 @@
 
 - Picture in Picture for iOS (iPhone, iPad)
 
-![alt tag](Screenshot/default.gif)
-![alt tag](Screenshot/transition.gif)
+<img src="/Screenshot/default.gif" width="40%" alt="default">
+<img src="/Screenshot/transition.gif" width="40%" alt="transition">
 
 ## Requirements
 - iOS 8.0+
