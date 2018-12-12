@@ -105,10 +105,12 @@ final class PIPKitEventDispatcher {
     
     private func didEnterFullScreen() {
         transitionGesture.isEnabled = false
+        rootViewController?.didChangedState(.full)
     }
     
     private func didEnterPIP() {
         transitionGesture.isEnabled = true
+        rootViewController?.didChangedState(.pip)
     }
     
     private func updatePIPFrame() {
