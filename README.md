@@ -39,6 +39,7 @@ github "Kofktu/PIPKit"
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var pipSize: CGSize { get }
+    func didChangedState(_ state: PIPState)
 }
 
 ```
@@ -49,8 +50,8 @@ public protocol PIPUsable {
 class PIPKit {
     var isPIP: Bool
     var hasPIPViewController: Bool
-    
-    class func show(with viewController: PIPKitViewController, completion: (() -> Void)? = nil) 
+
+    class func show(with viewController: PIPKitViewController, completion: (() -> Void)? = nil)
     class func dismiss(animated: Bool, completion: (() -> Void)? = nil)
 }
 ```
@@ -96,6 +97,8 @@ class PIPViewController: UIViewController, PIPUsable {
             startPIPMode()
         }
     }
+
+    func didChangedState(_ state: PIPState) {}
 }
 ```
 
