@@ -87,6 +87,15 @@ class PIPViewController: UIViewController, PIPUsable {
         }
     }
     
+    func didChangedState(_ state: PIPState) {
+        switch state {
+        case .pip:
+            print("PIPViewController.pip")
+        case .full:
+            print("PIPViewController.full")
+        }
+    }
+    
 }
 
 class PIPXibViewController: UIViewController, PIPUsable {
@@ -100,6 +109,15 @@ class PIPXibViewController: UIViewController, PIPUsable {
             fatalError("PIPXibViewController is null")
         }
         return viewController
+    }
+    
+    func didChangedState(_ state: PIPState) {
+        switch state {
+        case .pip:
+            print("PIPXibViewController.pip")
+        case .full:
+            print("PIPXibViewController.full")
+        }
     }
     
     // MARK: - Action
