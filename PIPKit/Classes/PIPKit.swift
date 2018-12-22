@@ -17,8 +17,9 @@ public typealias PIPKitViewController = (UIViewController & PIPUsable)
 
 public final class PIPKit {
     
-    static public var hasPIPViewController: Bool { return rootViewController != nil }
+    static public var isActive: Bool { return rootViewController != nil }
     static public var isPIP: Bool { return state == .pip }
+    static public var visibleViewController: PIPKitViewController? { return rootViewController }
     
     static internal var state: _PIPState = .none
     static private var rootViewController: PIPKitViewController?
@@ -28,7 +29,7 @@ public final class PIPKit {
             return
         }
         
-        guard !hasPIPViewController else {
+        guard !isActive else {
             dismiss(animated: false) {
                 PIPKit.show(with: viewController)
             }
