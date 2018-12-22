@@ -49,7 +49,8 @@ public protocol PIPUsable {
 ```swift
 class PIPKit {
     var isPIP: Bool
-    var hasPIPViewController: Bool
+    var isActive: Bool
+    var visibleViewController: PIPKitViewController?
 
     class func show(with viewController: PIPKitViewController, completion: (() -> Void)? = nil)
     class func dismiss(animated: Bool, completion: (() -> Void)? = nil)
