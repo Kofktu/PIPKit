@@ -94,12 +94,9 @@ final class PIPKitEventDispatcher {
         deviceNotificationObserver = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification,
                                                                             object: nil,
                                                                             queue: nil) { [weak self] (noti) in
-                                                                                self?.rootViewController?.view.alpha = 0.0
                                                                                 UIView.animate(withDuration: 0.15, animations: {
                                                                                     self?.updateFrame()
-                                                                                }, completion: { (_) in
-                                                                                    self?.rootViewController?.view.alpha = 1.0
-                                                                                })
+                                                                                }, completion:nil)
         }
     }
     
