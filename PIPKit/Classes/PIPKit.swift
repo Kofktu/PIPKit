@@ -6,6 +6,15 @@ public enum PIPState {
     case full
 }
 
+public enum PIPPosition {
+    case topLeft
+    case middleLeft
+    case bottomLeft
+    case topRight
+    case middleRight
+    case bottomRight
+}
+
 enum _PIPState {
     case none
     case pip
