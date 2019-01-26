@@ -101,6 +101,7 @@ class PIPViewController: UIViewController, PIPUsable {
 class PIPXibViewController: UIViewController, PIPUsable {
     
     var initialState: PIPState { return .full }
+    var initialPosition: PIPPosition { return .topRight }
     var pipSize: CGSize = CGSize(width: 100.0, height: 100.0)
  
     class func viewController() -> PIPXibViewController {

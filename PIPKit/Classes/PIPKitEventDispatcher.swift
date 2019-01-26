@@ -14,22 +14,13 @@ final class PIPKitEventDispatcher {
         static let hangAroundPadding: CGFloat = 15.0
     }
     
-    private enum PIPPosition {
-        case topLeft
-        case middleLeft
-        case bottomLeft
-        case topRight
-        case middleRight
-        case bottomRight
-    }
-    
     private weak var rootViewController: PIPKitViewController?
     private lazy var transitionGesture: UIPanGestureRecognizer = {
         UIPanGestureRecognizer(target: self, action: #selector(onTransition(_:)))
     }()
     
+    var pipPosition: PIPPosition = .bottomRight
     private var startOffset: CGPoint = .zero
-    private var pipPosition: PIPPosition = .bottomRight
     private var deviceNotificationObserver: NSObjectProtocol?
     
     deinit {
@@ -40,6 +31,8 @@ final class PIPKitEventDispatcher {
     
     init(rootViewController: PIPKitViewController) {
         self.rootViewController = rootViewController
+        self.pipPosition = rootViewController.initialPosition
+        
         commonInit()
         updateFrame()
         
