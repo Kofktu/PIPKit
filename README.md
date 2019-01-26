@@ -38,6 +38,7 @@ github "Kofktu/PIPKit"
 ```swift
 public protocol PIPUsable {
     var initialState: PIPState { get }
+    var initialPosition: PIPPosition { get }
     var pipSize: CGSize { get }
     func didChangedState(_ state: PIPState)
 }
