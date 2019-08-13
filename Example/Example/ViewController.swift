@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func onPIPViewController(_ sender: UIButton) {
-        PIPKit.show(with: PIPViewController())
+        PIPViewController().pip.show()
     }
     
     @IBAction private func onPIPViewControllerWithXib(_ sender: UIButton) {
