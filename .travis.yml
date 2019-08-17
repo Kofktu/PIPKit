@@ -1,10 +1,10 @@
 os: osx
-osx_image: xcode10
+osx_image: xcode10.3
 sudo: false
 language: objective-c
 
 env:
-- SDK="iphoneos12.0"
+- SDK="iphoneos12.4"
 
 before_install:
 - set -o pipefail
@@ -16,4 +16,4 @@ script:
   -sdk $SDK
   -configuration Debug
   -enableCodeCoverage YES
-  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c
+  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcpretty -c
