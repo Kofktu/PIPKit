@@ -121,6 +121,23 @@ class PIPXibViewController: UIViewController, PIPUsable {
         }
     }
     
+    func didChangePosition(_ position: PIPPosition) {
+        switch position {
+        case .topLeft:
+            print("PIPXibViewController.topLeft")
+        case .middleLeft:
+            print("PIPXibViewController.middleLeft")
+        case .bottomLeft:
+            print("PIPXibViewController.bottomLeft")
+        case .topRight:
+            print("PIPXibViewController.topRight")
+        case .middleRight:
+            print("PIPXibViewController.middleRight")
+        case .bottomRight:
+            print("PIPXibViewController.bottomRight")
+        }
+    }
+    
     // MARK: - Action
     @IBAction private func onFullAndPIP(_ sender: UIButton) {
         if PIPKit.isPIP {

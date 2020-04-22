@@ -6,6 +6,7 @@ public protocol PIPUsable {
     var initialPosition: PIPPosition { get }
     var pipSize: CGSize { get }
     func didChangedState(_ state: PIPState)
+    func didChangePosition(_ position: PIPPosition)
 }
 
 public extension PIPUsable {
@@ -13,6 +14,7 @@ public extension PIPUsable {
     var initialPosition: PIPPosition { return .bottomRight }
     var pipSize: CGSize { return CGSize(width: 200.0, height: (200.0 * 9.0) / 16.0) }
     func didChangedState(_ state: PIPState) {}
+    func didChangePosition(_ position: PIPPosition) {}
 }
 
 public extension PIPUsable where Self: UIViewController {

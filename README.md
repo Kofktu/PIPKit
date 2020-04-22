@@ -41,6 +41,7 @@ public protocol PIPUsable {
     var initialPosition: PIPPosition { get }
     var pipSize: CGSize { get }
     func didChangedState(_ state: PIPState)
+    func didChangePosition(_ position: PIPPosition)
 }
 
 ```
