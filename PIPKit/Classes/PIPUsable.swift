@@ -40,8 +40,9 @@ internal extension PIPUsable where Self: UIViewController {
     
     func pipDismiss(animated: Bool, completion: (() -> Void)?) {
         if animated {
-            UIView.animate(withDuration: 0.15, animations: { [weak self] in
+            UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseOut, animations: { [weak self] in
                 self?.view.alpha = 0.0
+                self?.view.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             }) { [weak self] (_) in
                 self?.view.removeFromSuperview()
                 completion?()
