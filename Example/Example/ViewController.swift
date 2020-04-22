@@ -102,7 +102,8 @@ class PIPXibViewController: UIViewController, PIPUsable {
     
     var initialState: PIPState { return .full }
     var initialPosition: PIPPosition { return .topRight }
-    var edgePadding: CGFloat { return 25 }
+    var verticalEdgePadding: CGFloat { return 25 }
+    var horizontalEdgePadding: CGFloat { return 10 }
     var pipSize: CGSize = CGSize(width: 100.0, height: 100.0)
  
     class func viewController() -> PIPXibViewController {

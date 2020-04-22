@@ -4,7 +4,8 @@ import UIKit
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
-    var edgePadding: CGFloat { get }
+    var verticalEdgePadding: CGFloat { get }
+    var horizontalEdgePadding: CGFloat { get }
     var pipSize: CGSize { get }
     func didChangedState(_ state: PIPState)
 }
@@ -12,7 +13,8 @@ public protocol PIPUsable {
 public extension PIPUsable {
     var initialState: PIPState { return .pip }
     var initialPosition: PIPPosition { return .bottomRight }
-    var edgePadding: CGFloat { return 15 }
+    var verticalEdgePadding: CGFloat { return 15 }
+    var horizontalEdgePadding: CGFloat { return 15 }
     var pipSize: CGSize { return CGSize(width: 200.0, height: (200.0 * 9.0) / 16.0) }
     func didChangedState(_ state: PIPState) {}
 }

@@ -15,7 +15,8 @@ final class PIPKitEventDispatcher {
         UIPanGestureRecognizer(target: self, action: #selector(onTransition(_:)))
     }()
     
-    var edgePadding: CGFloat = 15.0
+    var verticalEdgePadding: CGFloat = 15.0
+    var horizontalEdgePadding: CGFloat = 15.0
     var pipPosition: PIPPosition = .bottomRight
     
     private var startOffset: CGPoint = .zero
@@ -29,7 +30,8 @@ final class PIPKitEventDispatcher {
     
     init(rootViewController: PIPKitViewController) {
         self.rootViewController = rootViewController
-        self.edgePadding = rootViewController.edgePadding
+        self.verticalEdgePadding = rootViewController.verticalEdgePadding
+        self.horizontalEdgePadding = rootViewController.horizontalEdgePadding
         self.pipPosition = rootViewController.initialPosition
         
         commonInit()
@@ -118,25 +120,25 @@ final class PIPKitEventDispatcher {
         
         switch pipPosition {
         case .topLeft:
-            origin.x = safeAreaInsets.left + edgePadding
-            origin.y = safeAreaInsets.top + edgePadding
+            origin.x = safeAreaInsets.left + horizontalEdgePadding
+            origin.y = safeAreaInsets.top + verticalEdgePadding
         case .middleLeft:
-            origin.x = safeAreaInsets.left + edgePadding
+            origin.x = safeAreaInsets.left + horizontalEdgePadding
             let vh = (window.frame.height - (safeAreaInsets.top + safeAreaInsets.bottom)) / 3.0
             origin.y = safeAreaInsets.top + (vh * 2.0) - ((vh + pipSize.height) / 2.0)
         case .bottomLeft:
-            origin.x = safeAreaInsets.left + edgePadding
-            origin.y = window.frame.height - safeAreaInsets.bottom - edgePadding - pipSize.height
+            origin.x = safeAreaInsets.left + horizontalEdgePadding
+            origin.y = window.frame.height - safeAreaInsets.bottom - verticalEdgePadding - pipSize.height
         case .topRight:
-            origin.x = window.frame.width - safeAreaInsets.right - edgePadding - pipSize.width
-            origin.y = safeAreaInsets.top + edgePadding
+            origin.x = window.frame.width - safeAreaInsets.right - horizontalEdgePadding - pipSize.width
+            origin.y = safeAreaInsets.top + verticalEdgePadding
         case .middleRight:
-            origin.x = window.frame.width - safeAreaInsets.right - edgePadding - pipSize.width
+            origin.x = window.frame.width - safeAreaInsets.right - horizontalEdgePadding - pipSize.width
             let vh = (window.frame.height - (safeAreaInsets.top + safeAreaInsets.bottom)) / 3.0
             origin.y = safeAreaInsets.top + (vh * 2.0) - ((vh + pipSize.height) / 2.0)
         case .bottomRight:
-            origin.x = window.frame.width - safeAreaInsets.right - edgePadding - pipSize.width
-            origin.y = window.frame.height - safeAreaInsets.bottom - edgePadding - pipSize.height
+            origin.x = window.frame.width - safeAreaInsets.right - horizontalEdgePadding - pipSize.width
+            origin.y = window.frame.height - safeAreaInsets.bottom - verticalEdgePadding - pipSize.height
         }
         
         rootViewController.view.frame = CGRect(origin: origin, size: pipSize)
@@ -193,12 +195,12 @@ final class PIPKitEventDispatcher {
             var offset = startOffset
             offset.x += transition.x
             offset.y += transition.y
-            offset.x = max(safeAreaInsets.left + edgePadding + (pipSize.width / 2.0),
+            offset.x = max(safeAreaInsets.left + horizontalEdgePadding + (pipSize.width / 2.0),
                            min(offset.x,
-                               (window.frame.width - (safeAreaInsets.left + safeAreaInsets.right) - edgePadding) - (pipSize.width / 2.0)))
-            offset.y = max(safeAreaInsets.top + edgePadding + (pipSize.height / 2.0),
+                               (window.frame.width - (safeAreaInsets.left + safeAreaInsets.right) - horizontalEdgePadding) - (pipSize.width / 2.0)))
+            offset.y = max(safeAreaInsets.top + verticalEdgePadding + (pipSize.height / 2.0),
                            min(offset.y,
-                               (window.frame.height - (safeAreaInsets.bottom) - edgePadding) - (pipSize.height / 2.0)))
+                               (window.frame.height - (safeAreaInsets.bottom) - verticalEdgePadding) - (pipSize.height / 2.0)))
             
             rootViewController.view.center = offset
         case .ended:
