@@ -166,6 +166,8 @@ final class PIPKitEventDispatcher {
         default:
             pipPosition = center.x < window.frame.width / 2.0 ? .middleLeft : .middleRight
         }
+        
+        rootViewController.didChangePosition(pipPosition)
     }
     
     // MARK: - Action
