@@ -39,6 +39,7 @@ github "Kofktu/PIPKit"
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
+    var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
     func didChangedState(_ state: PIPState)
     func didChangePosition(_ position: PIPPosition)

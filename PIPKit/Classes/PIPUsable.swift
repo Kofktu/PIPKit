@@ -4,6 +4,7 @@ import UIKit
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
+    var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
     func didChangedState(_ state: PIPState)
     func didChangePosition(_ position: PIPPosition)
@@ -12,6 +13,7 @@ public protocol PIPUsable {
 public extension PIPUsable {
     var initialState: PIPState { return .pip }
     var initialPosition: PIPPosition { return .bottomRight }
+    var pipEdgeInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15) }
     var pipSize: CGSize { return CGSize(width: 200.0, height: (200.0 * 9.0) / 16.0) }
     func didChangedState(_ state: PIPState) {}
     func didChangePosition(_ position: PIPPosition) {}
