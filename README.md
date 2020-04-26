@@ -1,6 +1,6 @@
 # PIPKit
 
-![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/PIPKit.svg?style=flat)](http://cocoapods.org/?q=name%3APIPKit%20author%3AKofktu)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -11,8 +11,8 @@
 
 ## Requirements
 - iOS 8.0+
-- Swift 4.2
-- XCode 10
+- Swift 5.0
+- Xcode 11
 
 ## Installation
 

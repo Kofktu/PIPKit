@@ -172,9 +172,11 @@
 				TargetAttributes = {
 					CECD618021BA657800A60C31 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
 					};
 					CECD619421BA657A00A60C31 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1140;
 						TestTargetID = CECD618021BA657800A60C31;
 					};
 				};
