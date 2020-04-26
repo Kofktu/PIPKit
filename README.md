@@ -40,6 +40,8 @@ public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
     var pipSize: CGSize { get }
+    var pipShadow: PIPShadow? { get }
+    var pipCorner: PIPCorner? { get }
     func didChangedState(_ state: PIPState)
 }
 

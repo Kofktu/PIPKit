@@ -103,6 +103,8 @@ class PIPXibViewController: UIViewController, PIPUsable {
     var initialState: PIPState { return .full }
     var initialPosition: PIPPosition { return .topRight }
     var pipSize: CGSize = CGSize(width: 100.0, height: 100.0)
+    var pipShadow: PIPShadow? = nil
+    var pipCorner: PIPCorner? = nil
  
     class func viewController() -> PIPXibViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

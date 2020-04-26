@@ -84,13 +84,20 @@ final class PIPKitEventDispatcher {
     private func commonInit() {
         rootViewController?.view.addGestureRecognizer(transitionGesture)
         
-        rootViewController?.view.layer.shadowOffset = CGSize(width: 0, height: 8)
-        rootViewController?.view.layer.shadowOpacity = 0.3
-        rootViewController?.view.layer.shadowRadius = 10
+        if let pipShadow = rootViewController?.pipShadow {
+            rootViewController?.view.layer.shadowColor = pipShadow.color.cgColor
+            rootViewController?.view.layer.shadowOpacity = pipShadow.opacity
+            rootViewController?.view.layer.shadowOffset = pipShadow.offset
+            rootViewController?.view.layer.shadowRadius = pipShadow.radius
+        }
         
-        rootViewController?.view.layer.cornerRadius = 6
-        if #available(iOS 13.0, *) {
-            rootViewController?.view.layer.cornerCurve = .continuous
+        if let pipCorner = rootViewController?.pipCorner {
+            rootViewController?.view.layer.cornerRadius = pipCorner.radius
+            if let curve = pipCorner.curve {
+                if #available(iOS 13.0, *) {
+                    rootViewController?.view.layer.cornerCurve = curve
+                }
+            }
         }
         
         deviceNotificationObserver = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification,

@@ -1,6 +1,18 @@
 import Foundation
 import UIKit
 
+public struct PIPShadow {
+    let color: UIColor
+    let opacity: Float
+    let offset: CGSize
+    let radius: CGFloat
+}
+
+public struct PIPCorner {
+    let radius: CGFloat
+    let curve: CALayerCornerCurve?
+}
+
 public enum PIPState {
     case pip
     case full
