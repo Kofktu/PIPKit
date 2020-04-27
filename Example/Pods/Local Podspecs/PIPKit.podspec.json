@@ -1,6 +1,6 @@
 {
   "name": "PIPKit",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "summary": "PIP(Picture in Picture) for iOS",
   "description": "Picture in Picture to UIViewController",
   "homepage": "https://github.com/Kofktu/PIPKit",
@@ -12,12 +12,13 @@
     "kofktu@gmail.com": "kofktu@gmail.com"
   },
   "source": {
-    "git": "https://github.com/Kofktu/PIPKit",
-    "tag": "0.0.1"
+    "git": "https://github.com/Kofktu/PIPKit.git",
+    "tag": "0.1.0"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "swift_version": "4.2",
-  "source_files": "PIPKit/Classes/**/*"
+  "swift_versions": "5.0",
+  "source_files": "PIPKit/Classes/**/*",
+  "swift_version": "5.0"
 }
