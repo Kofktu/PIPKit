@@ -41,6 +41,8 @@ public protocol PIPUsable {
     var initialPosition: PIPPosition { get }
     var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
+    var pipShadow: PIPShadow? { get }
+    var pipCorner: PIPCorner? { get }
     func didChangedState(_ state: PIPState)
     func didChangePosition(_ position: PIPPosition)
 }

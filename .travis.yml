@@ -1,10 +1,10 @@
 os: osx
-osx_image: xcode10.3
+osx_image: xcode11
 sudo: false
 language: objective-c
 
 env:
-- SDK="iphoneos12.4"
+- SDK="iphoneos13.0"
 
 before_install:
 - set -o pipefail

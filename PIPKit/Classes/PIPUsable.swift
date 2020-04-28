@@ -6,6 +6,8 @@ public protocol PIPUsable {
     var initialPosition: PIPPosition { get }
     var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
+    var pipShadow: PIPShadow? { get }
+    var pipCorner: PIPCorner? { get }
     func didChangedState(_ state: PIPState)
     func didChangePosition(_ position: PIPPosition)
 }
@@ -15,6 +17,14 @@ public extension PIPUsable {
     var initialPosition: PIPPosition { return .bottomRight }
     var pipEdgeInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15) }
     var pipSize: CGSize { return CGSize(width: 200.0, height: (200.0 * 9.0) / 16.0) }
+    var pipShadow: PIPShadow? { return PIPShadow(color: .black, opacity: 0.3, offset: CGSize(width: 0, height: 8), radius: 10) }
+    var pipCorner: PIPCorner? {
+        if #available(iOS 13.0, *) {
+            return PIPCorner(radius: 6, curve: .continuous)
+        } else {
+            return PIPCorner(radius: 6, curve: nil)
+        }
+    }
     func didChangedState(_ state: PIPState) {}
     func didChangePosition(_ position: PIPPosition) {}
 }
