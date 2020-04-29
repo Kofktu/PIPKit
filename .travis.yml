@@ -13,6 +13,7 @@ script:
 - xcodebuild clean build test
   -workspace Example/Example.xcworkspace
   -scheme Example
+  -destination 'platform=iOS Simulator'
   -sdk $SDK
   -configuration Debug
   -enableCodeCoverage YES
