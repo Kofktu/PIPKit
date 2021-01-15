@@ -31,7 +31,7 @@ public extension PIPUsable {
 
 public extension PIPUsable where Self: UIViewController {
     
-    func setNeedUpdatePIPSize() {
+    func setNeedsUpdatePIPFrame() {
         guard PIPKit.isPIP else {
             return
         }

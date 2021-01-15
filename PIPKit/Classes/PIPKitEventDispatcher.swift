@@ -16,7 +16,6 @@ final class PIPKitEventDispatcher {
     }()
     
     var pipPosition: PIPPosition
-    var pipEdgeInsets: UIEdgeInsets
     
     private var startOffset: CGPoint = .zero
     private var deviceNotificationObserver: NSObjectProtocol?
@@ -30,7 +29,6 @@ final class PIPKitEventDispatcher {
     init(rootViewController: PIPKitViewController) {
         self.rootViewController = rootViewController
         self.pipPosition = rootViewController.initialPosition
-        self.pipEdgeInsets = rootViewController.pipEdgeInsets
         
         commonInit()
         updateFrame()
@@ -126,6 +124,7 @@ final class PIPKitEventDispatcher {
         
         var origin = CGPoint.zero
         let pipSize = rootViewController.pipSize
+        let pipEdgeInsets = rootViewController.pipEdgeInsets
         var safeAreaInsets = UIEdgeInsets.zero
         
         if #available(iOS 11.0, *) {
@@ -202,6 +201,7 @@ final class PIPKitEventDispatcher {
         case .changed:
             let transition = gesture.translation(in: window)
             let pipSize = rootViewController.pipSize
+            let pipEdgeInsets = rootViewController.pipEdgeInsets
             var safeAreaInsets = UIEdgeInsets.zero
             
             if #available(iOS 11.0, *) {

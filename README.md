@@ -64,7 +64,7 @@ class PIPKit {
 
 #### PIPKitViewController (UIViewController & PIPUsable)
 ```swift
-func setNeedUpdatePIPSize()
+func setNeedsUpdatePIPFrame()
 func startPIPMode()
 func stopPIPMode()
 ```
@@ -88,7 +88,8 @@ PIPKit.dismiss(animated: true)
 class PIPViewController: UIViewController, PIPUsable {
     func updatePIPSize() {
         pipSize = CGSize()
-        setNeedUpdatePIPSize()
+        pipEdgeInsets = UIEdgeInsets()
+        setNeedsUpdatePIPFrame()
     }
 }
 ```
