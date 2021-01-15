@@ -39,6 +39,7 @@ github "Kofktu/PIPKit"
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
+    var insetsPIPFromSafeArea: Bool { get }
     var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
     var pipShadow: PIPShadow? { get }
