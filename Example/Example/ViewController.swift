@@ -153,7 +153,7 @@ class PIPXibViewController: UIViewController, PIPUsable {
     @IBAction private func onUpdatePIPSize(_ sender: UIButton) {
         pipSize = CGSize(width: 100 + Int(arc4random_uniform(100)),
                          height: 100 + Int(arc4random_uniform(100)))
-        setNeedUpdatePIPSize()
+        setNeedsUpdatePIPFrame()
     }
     
     @IBAction private func onDismiss(_ sender: UIButton) {

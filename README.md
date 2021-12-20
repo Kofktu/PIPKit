@@ -39,6 +39,7 @@ github "Kofktu/PIPKit"
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
+    var insetsPIPFromSafeArea: Bool { get }
     var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
     var pipShadow: PIPShadow? { get }
@@ -64,7 +65,7 @@ class PIPKit {
 
 #### PIPKitViewController (UIViewController & PIPUsable)
 ```swift
-func setNeedUpdatePIPSize()
+func setNeedsUpdatePIPFrame()
 func startPIPMode()
 func stopPIPMode()
 ```
@@ -88,7 +89,8 @@ PIPKit.dismiss(animated: true)
 class PIPViewController: UIViewController, PIPUsable {
     func updatePIPSize() {
         pipSize = CGSize()
-        setNeedUpdatePIPSize()
+        pipEdgeInsets = UIEdgeInsets()
+        setNeedsUpdatePIPFrame()
     }
 }
 ```
