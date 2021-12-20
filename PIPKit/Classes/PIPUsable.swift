@@ -4,6 +4,7 @@ import UIKit
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
+    var insetsPIPFromSafeArea: Bool { get }
     var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
     var pipShadow: PIPShadow? { get }
@@ -15,6 +16,7 @@ public protocol PIPUsable {
 public extension PIPUsable {
     var initialState: PIPState { return .pip }
     var initialPosition: PIPPosition { return .bottomRight }
+    var insetsPIPFromSafeArea: Bool { return true }
     var pipEdgeInsets: UIEdgeInsets { return UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15) }
     var pipSize: CGSize { return CGSize(width: 200.0, height: (200.0 * 9.0) / 16.0) }
     var pipShadow: PIPShadow? { return PIPShadow(color: .black, opacity: 0.3, offset: CGSize(width: 0, height: 8), radius: 10) }
@@ -31,7 +33,7 @@ public extension PIPUsable {
 
 public extension PIPUsable where Self: UIViewController {
     
-    func setNeedUpdatePIPSize() {
+    func setNeedsUpdatePIPFrame() {
         guard PIPKit.isPIP else {
             return
         }

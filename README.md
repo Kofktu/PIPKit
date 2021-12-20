@@ -3,6 +3,7 @@
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/PIPKit.svg?style=flat)](http://cocoapods.org/?q=name%3APIPKit%20author%3AKofktu)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat"></a>
 
 - Picture in Picture for iOS (iPhone, iPad)
 
@@ -31,6 +32,18 @@ For iOS 8+ projects with [Carthage](https://github.com/Carthage/Carthage)
 github "Kofktu/PIPKit"
 ```
 
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but Alamofire does support its use on supported platforms.
+
+Once you have your Swift package set up, adding `PIPKit` as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "0.5.0"))
+]
+```
+
 ## Usage
 
 #### PIPUsable
@@ -39,6 +52,7 @@ github "Kofktu/PIPKit"
 public protocol PIPUsable {
     var initialState: PIPState { get }
     var initialPosition: PIPPosition { get }
+    var insetsPIPFromSafeArea: Bool { get }
     var pipEdgeInsets: UIEdgeInsets { get }
     var pipSize: CGSize { get }
     var pipShadow: PIPShadow? { get }
@@ -64,7 +78,7 @@ class PIPKit {
 
 #### PIPKitViewController (UIViewController & PIPUsable)
 ```swift
-func setNeedUpdatePIPSize()
+func setNeedsUpdatePIPFrame()
 func startPIPMode()
 func stopPIPMode()
 ```
@@ -88,7 +102,8 @@ PIPKit.dismiss(animated: true)
 class PIPViewController: UIViewController, PIPUsable {
     func updatePIPSize() {
         pipSize = CGSize()
-        setNeedUpdatePIPSize()
+        pipEdgeInsets = UIEdgeInsets()
+        setNeedsUpdatePIPFrame()
     }
 }
 ```

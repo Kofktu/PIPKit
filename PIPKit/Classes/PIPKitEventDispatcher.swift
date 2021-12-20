@@ -16,7 +16,6 @@ final class PIPKitEventDispatcher {
     }()
     
     var pipPosition: PIPPosition
-    var pipEdgeInsets: UIEdgeInsets
     
     private var startOffset: CGPoint = .zero
     private var deviceNotificationObserver: NSObjectProtocol?
@@ -30,7 +29,6 @@ final class PIPKitEventDispatcher {
     init(rootViewController: PIPKitViewController) {
         self.rootViewController = rootViewController
         self.pipPosition = rootViewController.initialPosition
-        self.pipEdgeInsets = rootViewController.pipEdgeInsets
         
         commonInit()
         updateFrame()
@@ -126,33 +124,36 @@ final class PIPKitEventDispatcher {
         
         var origin = CGPoint.zero
         let pipSize = rootViewController.pipSize
-        var safeAreaInsets = UIEdgeInsets.zero
+        let pipEdgeInsets = rootViewController.pipEdgeInsets
+        var edgeInsets = UIEdgeInsets.zero
         
         if #available(iOS 11.0, *) {
-            safeAreaInsets = window.safeAreaInsets
+            if rootViewController.insetsPIPFromSafeArea {
+                edgeInsets = window.safeAreaInsets
+            }
         }
         
         switch pipPosition {
         case .topLeft:
-            origin.x = safeAreaInsets.left + pipEdgeInsets.left
-            origin.y = safeAreaInsets.top + pipEdgeInsets.top
+            origin.x = edgeInsets.left + pipEdgeInsets.left
+            origin.y = edgeInsets.top + pipEdgeInsets.top
         case .middleLeft:
-            origin.x = safeAreaInsets.left + pipEdgeInsets.left
-            let vh = (window.frame.height - (safeAreaInsets.top + safeAreaInsets.bottom)) / 3.0
-            origin.y = safeAreaInsets.top + (vh * 2.0) - ((vh + pipSize.height) / 2.0)
+            origin.x = edgeInsets.left + pipEdgeInsets.left
+            let vh = (window.frame.height - (edgeInsets.top + edgeInsets.bottom)) / 3.0
+            origin.y = edgeInsets.top + (vh * 2.0) - ((vh + pipSize.height) / 2.0)
         case .bottomLeft:
-            origin.x = safeAreaInsets.left + pipEdgeInsets.left
-            origin.y = window.frame.height - safeAreaInsets.bottom - pipEdgeInsets.bottom - pipSize.height
+            origin.x = edgeInsets.left + pipEdgeInsets.left
+            origin.y = window.frame.height - edgeInsets.bottom - pipEdgeInsets.bottom - pipSize.height
         case .topRight:
-            origin.x = window.frame.width - safeAreaInsets.right - pipEdgeInsets.right - pipSize.width
-            origin.y = safeAreaInsets.top + pipEdgeInsets.top
+            origin.x = window.frame.width - edgeInsets.right - pipEdgeInsets.right - pipSize.width
+            origin.y = edgeInsets.top + pipEdgeInsets.top
         case .middleRight:
-            origin.x = window.frame.width - safeAreaInsets.right - pipEdgeInsets.right - pipSize.width
-            let vh = (window.frame.height - (safeAreaInsets.top + safeAreaInsets.bottom)) / 3.0
-            origin.y = safeAreaInsets.top + (vh * 2.0) - ((vh + pipSize.height) / 2.0)
+            origin.x = window.frame.width - edgeInsets.right - pipEdgeInsets.right - pipSize.width
+            let vh = (window.frame.height - (edgeInsets.top + edgeInsets.bottom)) / 3.0
+            origin.y = edgeInsets.top + (vh * 2.0) - ((vh + pipSize.height) / 2.0)
         case .bottomRight:
-            origin.x = window.frame.width - safeAreaInsets.right - pipEdgeInsets.right - pipSize.width
-            origin.y = window.frame.height - safeAreaInsets.bottom - pipEdgeInsets.bottom - pipSize.height
+            origin.x = window.frame.width - edgeInsets.right - pipEdgeInsets.right - pipSize.width
+            origin.y = window.frame.height - edgeInsets.bottom - pipEdgeInsets.bottom - pipSize.height
         }
         
         rootViewController.view.frame = CGRect(origin: origin, size: pipSize)
@@ -202,21 +203,24 @@ final class PIPKitEventDispatcher {
         case .changed:
             let transition = gesture.translation(in: window)
             let pipSize = rootViewController.pipSize
-            var safeAreaInsets = UIEdgeInsets.zero
+            let pipEdgeInsets = rootViewController.pipEdgeInsets
+            var edgeInsets = UIEdgeInsets.zero
             
             if #available(iOS 11.0, *) {
-                safeAreaInsets = window.safeAreaInsets
+                if rootViewController.insetsPIPFromSafeArea {
+                    edgeInsets = window.safeAreaInsets
+                }
             }
             
             var offset = startOffset
             offset.x += transition.x
             offset.y += transition.y
-            offset.x = max(safeAreaInsets.left + pipEdgeInsets.left + (pipSize.width / 2.0),
+            offset.x = max(edgeInsets.left + pipEdgeInsets.left + (pipSize.width / 2.0),
                            min(offset.x,
-                               (window.frame.width - safeAreaInsets.right - pipEdgeInsets.right) - (pipSize.width / 2.0)))
-            offset.y = max(safeAreaInsets.top + pipEdgeInsets.top + (pipSize.height / 2.0),
+                               (window.frame.width - edgeInsets.right - pipEdgeInsets.right) - (pipSize.width / 2.0)))
+            offset.y = max(edgeInsets.top + pipEdgeInsets.top + (pipSize.height / 2.0),
                            min(offset.y,
-                               (window.frame.height - (safeAreaInsets.bottom) - pipEdgeInsets.bottom) - (pipSize.height / 2.0)))
+                               (window.frame.height - (edgeInsets.bottom) - pipEdgeInsets.bottom) - (pipSize.height / 2.0)))
             
             rootViewController.view.center = offset
         case .ended:
