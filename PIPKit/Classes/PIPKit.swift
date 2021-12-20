@@ -6,11 +6,27 @@ public struct PIPShadow {
     public let opacity: Float
     public let offset: CGSize
     public let radius: CGFloat
+    
+    public init(color: UIColor,
+                opacity: Float,
+                offset: CGSize,
+                radius: CGFloat) {
+        self.color = color
+        self.opacity = opacity
+        self.offset = offset
+        self.radius = radius
+    }
 }
 
 public struct PIPCorner {
     public let radius: CGFloat
     public let curve: CALayerCornerCurve?
+    
+    public init(radius: CGFloat,
+                curve: CALayerCornerCurve? = nil) {
+        self.radius = radius
+        self.curve = curve
+    }
 }
 
 public enum PIPState {
