@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE96575E2782BB6D00303B7F /* AVPIPKitUsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96575D2782BB6D00303B7F /* AVPIPKitUsable.swift */; };
+		CE9657602782BBCC00303B7F /* UIViewController+Associated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96575F2782BBCC00303B7F /* UIViewController+Associated.swift */; };
+		CE9657622782BC3900303B7F /* UIView+Associated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9657612782BC3900303B7F /* UIView+Associated.swift */; };
+		CE9657642782BC9100303B7F /* AVPIPKitVideoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9657632782BC9100303B7F /* AVPIPKitVideoProvider.swift */; };
+		CE9657662782BCAF00303B7F /* AVPIPKitVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9657652782BCAF00303B7F /* AVPIPKitVideoController.swift */; };
+		CE9657682782BEB500303B7F /* PIPKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE9972F2782A5CC002FA127 /* PIPKit.framework */; };
+		CE9657692782BEB500303B7F /* PIPKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE9972F2782A5CC002FA127 /* PIPKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE997332782A5CC002FA127 /* PIPKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE997322782A5CC002FA127 /* PIPKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEE9973E2782A5F1002FA127 /* PIPKitEventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */; };
 		CEE9973F2782A5F1002FA127 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9973B2782A5F1002FA127 /* UIWindow+Extension.swift */; };
@@ -27,9 +34,35 @@
 			remoteGlobalIDString = CEE9972E2782A5CC002FA127;
 			remoteInfo = PIPKit;
 		};
+		CE96576A2782BEB500303B7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEE997262782A5CC002FA127 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEE9972E2782A5CC002FA127;
+			remoteInfo = PIPKit;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CE96576C2782BEB500303B7F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE9657692782BEB500303B7F /* PIPKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		CE96575D2782BB6D00303B7F /* AVPIPKitUsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitUsable.swift; sourceTree = "<group>"; };
+		CE96575F2782BBCC00303B7F /* UIViewController+Associated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Associated.swift"; sourceTree = "<group>"; };
+		CE9657612782BC3900303B7F /* UIView+Associated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Associated.swift"; sourceTree = "<group>"; };
+		CE9657632782BC9100303B7F /* AVPIPKitVideoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitVideoProvider.swift; sourceTree = "<group>"; };
+		CE9657652782BCAF00303B7F /* AVPIPKitVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitVideoController.swift; sourceTree = "<group>"; };
 		CEE9972F2782A5CC002FA127 /* PIPKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PIPKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE997322782A5CC002FA127 /* PIPKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPKit.h; sourceTree = "<group>"; };
 		CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIPKitEventDispatcher.swift; sourceTree = "<group>"; };
@@ -57,18 +90,57 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9657682782BEB500303B7F /* PIPKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE96575A2782BB3000303B7F /* AVPIPKit */ = {
+			isa = PBXGroup;
+			children = (
+				CE96575D2782BB6D00303B7F /* AVPIPKitUsable.swift */,
+				CE9657632782BC9100303B7F /* AVPIPKitVideoProvider.swift */,
+				CE9657652782BCAF00303B7F /* AVPIPKitVideoController.swift */,
+			);
+			path = AVPIPKit;
+			sourceTree = "<group>";
+		};
+		CE96575B2782BB4E00303B7F /* PIPKit */ = {
+			isa = PBXGroup;
+			children = (
+				CEE9973C2782A5F1002FA127 /* PIPKit.swift */,
+				CEE9973D2782A5F1002FA127 /* PIPUsable.swift */,
+				CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */,
+			);
+			path = PIPKit;
+			sourceTree = "<group>";
+		};
+		CE96575C2782BB5900303B7F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CEE9973B2782A5F1002FA127 /* UIWindow+Extension.swift */,
+				CE96575F2782BBCC00303B7F /* UIViewController+Associated.swift */,
+				CE9657612782BC3900303B7F /* UIView+Associated.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CE9657672782BEB500303B7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CEE997252782A5CC002FA127 = {
 			isa = PBXGroup;
 			children = (
 				CEE997312782A5CC002FA127 /* PIPKit */,
 				CEE997472782A62B002FA127 /* Example */,
 				CEE997302782A5CC002FA127 /* Products */,
+				CE9657672782BEB500303B7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,10 +165,9 @@
 		CEE997392782A5F1002FA127 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CEE9973B2782A5F1002FA127 /* UIWindow+Extension.swift */,
-				CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */,
-				CEE9973C2782A5F1002FA127 /* PIPKit.swift */,
-				CEE9973D2782A5F1002FA127 /* PIPUsable.swift */,
+				CE96575C2782BB5900303B7F /* Extension */,
+				CE96575B2782BB4E00303B7F /* PIPKit */,
+				CE96575A2782BB3000303B7F /* AVPIPKit */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -153,11 +224,13 @@
 				CEE997422782A62B002FA127 /* Sources */,
 				CEE997432782A62B002FA127 /* Frameworks */,
 				CEE997442782A62B002FA127 /* Resources */,
+				CE96576C2782BEB500303B7F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				CE9657592782A6AB00303B7F /* PBXTargetDependency */,
+				CE96576B2782BEB500303B7F /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -229,6 +302,11 @@
 				CEE9973E2782A5F1002FA127 /* PIPKitEventDispatcher.swift in Sources */,
 				CEE9973F2782A5F1002FA127 /* UIWindow+Extension.swift in Sources */,
 				CEE997402782A5F1002FA127 /* PIPKit.swift in Sources */,
+				CE96575E2782BB6D00303B7F /* AVPIPKitUsable.swift in Sources */,
+				CE9657622782BC3900303B7F /* UIView+Associated.swift in Sources */,
+				CE9657642782BC9100303B7F /* AVPIPKitVideoProvider.swift in Sources */,
+				CE9657662782BCAF00303B7F /* AVPIPKitVideoController.swift in Sources */,
+				CE9657602782BBCC00303B7F /* UIViewController+Associated.swift in Sources */,
 				CEE997412782A5F1002FA127 /* PIPUsable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +327,11 @@
 			isa = PBXTargetDependency;
 			target = CEE9972E2782A5CC002FA127 /* PIPKit */;
 			targetProxy = CE9657582782A6AB00303B7F /* PBXContainerItemProxy */;
+		};
+		CE96576B2782BEB500303B7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEE9972E2782A5CC002FA127 /* PIPKit */;
+			targetProxy = CE96576A2782BEB500303B7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

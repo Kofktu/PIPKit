@@ -62,6 +62,25 @@ class ViewController: UIViewController {
             viewController.setupDismissNavigationItem()
         }
     }
+    
+    @IBAction private func onAVPIPKitStart() {
+        guard #available(iOS 15.0, *), isAVKitPIPSupported else {
+            print("AVPIPKit not supported")
+            return
+        }
+        
+        startPictureInPicture()
+    }
+    
+    @IBAction private func onAVPIPKitStop() {
+        guard #available(iOS 15.0, *), isAVKitPIPSupported else {
+            print("AVPIPKit not supported")
+            return
+        }
+        
+        stopPictureInPicture()
+    }
+    
 }
 
 class PIPViewController: UIViewController, PIPUsable {
@@ -160,4 +179,13 @@ class PIPXibViewController: UIViewController, PIPUsable {
             print("PIPXibViewController.dismiss")
         }
     }
+}
+
+@available(iOS 15.0, *)
+extension ViewController: AVPIPKitUsable {
+    
+    var pipTargetView: UIView {
+        view
+    }
+    
 }
