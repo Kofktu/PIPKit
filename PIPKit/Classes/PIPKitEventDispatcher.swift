@@ -10,17 +10,22 @@ import UIKit
 
 final class PIPKitEventDispatcher {
     
+    var pipPosition: PIPPosition
+
+    private var window: UIWindow? {
+        rootViewController?.view.window
+    }
     private weak var rootViewController: PIPKitViewController?
     private lazy var transitionGesture: UIPanGestureRecognizer = {
         UIPanGestureRecognizer(target: self, action: #selector(onTransition(_:)))
     }()
     
-    var pipPosition: PIPPosition
-    
     private var startOffset: CGPoint = .zero
     private var deviceNotificationObserver: NSObjectProtocol?
+    private var windowSubviewsObservation: NSKeyValueObservation?
     
     deinit {
+        windowSubviewsObservation?.invalidate()
         deviceNotificationObserver.flatMap {
             NotificationCenter.default.removeObserver($0)
         }
@@ -58,7 +63,7 @@ final class PIPKitEventDispatcher {
     }
     
     func updateFrame() {
-        guard let window = UIApplication.shared.keyWindow,
+        guard let window = window,
             let rootViewController = rootViewController else {
                 return
         }
@@ -104,6 +109,16 @@ final class PIPKitEventDispatcher {
                                                                                     self?.updateFrame()
                                                                                 }, completion:nil)
         }
+        
+        windowSubviewsObservation = window?.observe(\.subviews,
+                                                     options: [.initial, .new],
+                                                     changeHandler: { [weak self] window, _ in
+            guard let rootViewController = self?.rootViewController else {
+                return
+            }
+            
+            window.bringSubviewToFront(rootViewController.view)
+        })
     }
     
     private func didEnterFullScreen() {
@@ -117,7 +132,7 @@ final class PIPKitEventDispatcher {
     }
     
     private func updatePIPFrame() {
-        guard let window = UIApplication.shared.keyWindow,
+        guard let window = window,
             let rootViewController = rootViewController else {
                 return
         }
@@ -160,7 +175,7 @@ final class PIPKitEventDispatcher {
     }
     
     private func updatePIPPosition() {
-        guard let window = UIApplication.shared.keyWindow,
+        guard let window = window,
             let rootViewController = rootViewController else {
                 return
         }
@@ -192,7 +207,7 @@ final class PIPKitEventDispatcher {
         guard PIPKit.isPIP else {
             return
         }
-        guard let window = UIApplication.shared.keyWindow,
+        guard let window = window,
             let rootViewController = rootViewController else {
             return
         }

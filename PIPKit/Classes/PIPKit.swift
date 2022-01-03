@@ -60,12 +60,9 @@ public final class PIPKit {
     
     static internal var state: _PIPState = .none
     static private var rootViewController: PIPKitViewController?
+    static private var pipWindow: UIWindow?
     
     public class func show(with viewController: PIPKitViewController, completion: (() -> Void)? = nil) {
-        guard let window = UIApplication.shared.keyWindow else {
-            return
-        }
-        
         guard !isActive else {
             dismiss(animated: false) {
                 PIPKit.show(with: viewController)
@@ -73,11 +70,17 @@ public final class PIPKit {
             return
         }
         
+        let newWindow = PIPKitWindow()
+        newWindow.backgroundColor = .clear
+        newWindow.rootViewController = viewController
+        newWindow.windowLevel = .alert
+        newWindow.makeKeyAndVisible()
+        
+        pipWindow = newWindow
         rootViewController = viewController
         state = (viewController.initialState == .pip) ? .pip : .full
         
         viewController.view.alpha = 0.0
-        window.addSubview(viewController.view)
         viewController.setupEventDispatcher()
         
         UIView.animate(withDuration: 0.25, animations: {
@@ -119,7 +122,21 @@ public final class PIPKit {
     // MARK: - Private
     private static func reset() {
         PIPKit.state = .none
+        PIPKit.pipWindow = nil
         PIPKit.rootViewController = nil
+        UIApplication.shared._keyWindow?.makeKeyAndVisible()
+    }
+    
+}
+
+final private class PIPKitWindow: UIWindow {
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard let rootViewController = rootViewController else {
+            return super.hitTest(point, with: event)
+        }
+        
+        return rootViewController.view.frame.contains(point) ? super.hitTest(point, with: event) : nil
     }
     
 }
