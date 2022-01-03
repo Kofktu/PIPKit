@@ -123,6 +123,40 @@ class PIPViewController: UIViewController, PIPUsable {
 }
 ```
 
+## AVPIPKitUsable
+UIView that is capable of Picture-in-Picture in iOS (AVKit.framework)
+
+### Requirements
+- iOS 15 or higher
+- Info.plist - `Audio, AirPlay and Picture in Picture` in `Background Modes`. For more information, see [Apple Documentation](https://developer.apple.com/documentation/avfoundation/media_playback_and_selection/creating_a_basic_video_player_ios_and_tvos/enabling_background_audio)
+
+### At a Glance
+```swift
+class View: UIView, AVPIPKitUsable {
+
+    var pipTargetView: UIView { self } // Return the subview that you want to show.
+    var renderPolicy: AVPIPKitRenderPolicy {
+        // .once - only once render
+        // .preferredFramesPerSecond - render in frames-per-second
+    }
+}
+
+view.startPictureInPicture()
+view.stopPictureInPicture()
+
+class ViewController: UIViewController, AVPIPKitUsable {
+    var pipTargetView: UIView { view } // Return the subview that you want to show.
+
+    func start() {
+        startPictureInPicture()
+    }
+
+    func stop() {
+        stopPictureInPicture()
+    }
+}
+```
+
 ## Authors
 
 Taeun Kim (kofktu), <kofktu@gmail.com>

@@ -17,13 +17,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="USO-Za-4e6">
-                                <rect key="frame" x="115" y="380" width="184" height="190"/>
+                                <rect key="frame" x="115" y="340" width="184" height="270"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTI-Ut-q1h">
                                         <rect key="frame" x="0.0" y="0.0" width="184" height="30"/>
                                         <state key="normal" title="PIPViewController"/>
                                         <connections>
-                                            <action selector="onFullAndPIP:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="5vl-gQ-g1J"/>
                                             <action selector="onPIPViewController:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="VmD-sX-gCB"/>
                                         </connections>
                                     </button>
@@ -32,14 +31,12 @@
                                         <state key="normal" title="PIPViewController with XIB"/>
                                         <connections>
                                             <action selector="onPIPViewControllerWithXib:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="jVw-EI-EYD"/>
-                                            <action selector="onUpdatePIPSize:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="tbA-sv-7gi"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="peE-tv-RbK">
                                         <rect key="frame" x="0.0" y="80" width="184" height="30"/>
                                         <state key="normal" title="PIP.dismiss"/>
                                         <connections>
-                                            <action selector="onDismiss:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="saS-6x-Y3Y"/>
                                             <action selector="onPIPDismiss" destination="KFE-fC-Gzg" eventType="touchUpInside" id="gKU-mL-LBw"/>
                                         </connections>
                                     </button>
@@ -47,7 +44,6 @@
                                         <rect key="frame" x="0.0" y="120" width="184" height="30"/>
                                         <state key="normal" title="PushViewController"/>
                                         <connections>
-                                            <action selector="onDismiss:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="kGo-fM-EW5"/>
                                             <action selector="onPushViewController:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="s0L-MG-uFq"/>
                                         </connections>
                                     </button>
@@ -55,8 +51,21 @@
                                         <rect key="frame" x="0.0" y="160" width="184" height="30"/>
                                         <state key="normal" title="PresentViewController"/>
                                         <connections>
-                                            <action selector="onDismiss:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="pIu-q0-Boa"/>
                                             <action selector="onPresentViewController:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="MMd-zK-lip"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Z0-mr-8wB">
+                                        <rect key="frame" x="0.0" y="200" width="184" height="30"/>
+                                        <state key="normal" title="AVPIPKit.start"/>
+                                        <connections>
+                                            <action selector="onAVPIPKitStart" destination="KFE-fC-Gzg" eventType="touchUpInside" id="hv4-rH-h3F"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-Cg-ZNP">
+                                        <rect key="frame" x="0.0" y="240" width="184" height="30"/>
+                                        <state key="normal" title="AVPIPKit.stop"/>
+                                        <connections>
+                                            <action selector="onAVPIPKitStop" destination="KFE-fC-Gzg" eventType="touchUpInside" id="iZY-sM-Uef"/>
                                         </connections>
                                     </button>
                                 </subviews>

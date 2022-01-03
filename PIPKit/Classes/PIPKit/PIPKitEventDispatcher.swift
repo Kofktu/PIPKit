@@ -250,23 +250,10 @@ final class PIPKitEventDispatcher {
     
 }
 
-extension UIViewController {
-    
-    struct AssociatedKeys {
-        static var pipEventDispatcher = "pipEventDispatcher"
-    }
-    
-    var pipEventDispatcher: PIPKitEventDispatcher? {
-        get { return objc_getAssociatedObject(self, &AssociatedKeys.pipEventDispatcher) as? PIPKitEventDispatcher }
-        set { objc_setAssociatedObject(self, &AssociatedKeys.pipEventDispatcher, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-    }
+extension PIPUsable where Self: UIViewController {
     
     func setupEventDispatcher() {
-        guard let pipViewController = self as? PIPKitViewController else {
-            return
-        }
-        
-        pipViewController.pipEventDispatcher = PIPKitEventDispatcher(rootViewController: pipViewController)
+        pipEventDispatcher = PIPKitEventDispatcher(rootViewController: self)
     }
     
 }
