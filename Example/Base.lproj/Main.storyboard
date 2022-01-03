@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iqI-Wn-itj">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="G8t-on-L8Q">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="KFE-fC-Gzg" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CmL-4n-fOV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="USO-Za-4e6">
+                                <rect key="frame" x="115" y="340" width="184" height="270"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTI-Ut-q1h">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="30"/>
+                                        <state key="normal" title="PIPViewController"/>
+                                        <connections>
+                                            <action selector="onPIPViewController:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="VmD-sX-gCB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBc-iW-Lb2">
+                                        <rect key="frame" x="0.0" y="40" width="184" height="30"/>
+                                        <state key="normal" title="PIPViewController with XIB"/>
+                                        <connections>
+                                            <action selector="onPIPViewControllerWithXib:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="jVw-EI-EYD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="peE-tv-RbK">
+                                        <rect key="frame" x="0.0" y="80" width="184" height="30"/>
+                                        <state key="normal" title="PIP.dismiss"/>
+                                        <connections>
+                                            <action selector="onPIPDismiss" destination="KFE-fC-Gzg" eventType="touchUpInside" id="gKU-mL-LBw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b33-4N-2Ui">
+                                        <rect key="frame" x="0.0" y="120" width="184" height="30"/>
+                                        <state key="normal" title="PushViewController"/>
+                                        <connections>
+                                            <action selector="onPushViewController:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="s0L-MG-uFq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6h-sD-dci">
+                                        <rect key="frame" x="0.0" y="160" width="184" height="30"/>
+                                        <state key="normal" title="PresentViewController"/>
+                                        <connections>
+                                            <action selector="onPresentViewController:" destination="KFE-fC-Gzg" eventType="touchUpInside" id="MMd-zK-lip"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Z0-mr-8wB">
+                                        <rect key="frame" x="0.0" y="200" width="184" height="30"/>
+                                        <state key="normal" title="AVPIPKit.start"/>
+                                        <connections>
+                                            <action selector="onAVPIPKitStart" destination="KFE-fC-Gzg" eventType="touchUpInside" id="hv4-rH-h3F"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-Cg-ZNP">
+                                        <rect key="frame" x="0.0" y="240" width="184" height="30"/>
+                                        <state key="normal" title="AVPIPKit.stop"/>
+                                        <connections>
+                                            <action selector="onAVPIPKitStop" destination="KFE-fC-Gzg" eventType="touchUpInside" id="iZY-sM-Uef"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="F5k-hO-pJi"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="USO-Za-4e6" firstAttribute="centerX" secondItem="F5k-hO-pJi" secondAttribute="centerX" id="VcO-4A-bI9"/>
+                            <constraint firstItem="USO-Za-4e6" firstAttribute="centerY" secondItem="F5k-hO-pJi" secondAttribute="centerY" id="Y4I-rt-Hfw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Eh-pi-ceX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Lc-Mq-hEg" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="81" y="26"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ROp-kH-mBl">
+            <objects>
+                <navigationController id="iqI-Wn-itj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9z3-nB-NSE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KFE-fC-Gzg" kind="relationship" relationship="rootViewController" id="TPk-hF-DnC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ogc-cQ-SZO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-646" y="26"/>
+        </scene>
+        <!--Xib View Controller-->
+        <scene sceneID="yC6-NY-q8Y">
+            <objects>
+                <viewController storyboardIdentifier="PIPXibViewController" id="9s9-Rg-8c7" customClass="PIPXibViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QJX-3L-a15">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tLD-DQ-LGh">
+                                <rect key="frame" x="166" y="398" width="82" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Gy-0j-5Tw">
+                                        <rect key="frame" x="0.0" y="0.0" width="82" height="30"/>
+                                        <state key="normal" title="Full And PIP"/>
+                                        <connections>
+                                            <action selector="onFullAndPIP:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="yaZ-uO-4ZO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aP-tU-PAS">
+                                        <rect key="frame" x="0.0" y="40" width="82" height="30"/>
+                                        <state key="normal" title="PIP Size"/>
+                                        <connections>
+                                            <action selector="onUpdatePIPSize:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="goq-9h-OiL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8C-rN-XKe">
+                                        <rect key="frame" x="0.0" y="80" width="82" height="30"/>
+                                        <state key="normal" title="Dismiss"/>
+                                        <connections>
+                                            <action selector="onDismiss:" destination="9s9-Rg-8c7" eventType="touchUpInside" id="m9d-YW-I0t"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ajb-gl-2Le"/>
+                        <color key="backgroundColor" red="0.96170979739999995" green="0.70866668219999995" blue="0.13854117690000001" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="tLD-DQ-LGh" firstAttribute="centerY" secondItem="Ajb-gl-2Le" secondAttribute="centerY" id="vvg-Ou-WyZ"/>
+                            <constraint firstItem="tLD-DQ-LGh" firstAttribute="centerX" secondItem="Ajb-gl-2Le" secondAttribute="centerX" id="w1a-Zx-GOf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Np-bi-FYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="737" y="26"/>
+        </scene>
+    </scenes>
+</document>

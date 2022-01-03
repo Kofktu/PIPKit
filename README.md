@@ -40,7 +40,7 @@ Once you have your Swift package set up, adding `PIPKit` as a dependency is as e
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "0.5.0"))
+  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
@@ -120,6 +120,42 @@ class PIPViewController: UIViewController, PIPUsable {
     }
 
     func didChangedState(_ state: PIPState) {}
+}
+```
+
+## AVPIPKitUsable
+UIView that is capable of Picture-in-Picture in iOS (AVKit.framework)
+
+<img src=https://user-images.githubusercontent.com/1860205/147901957-8716f857-3f7b-4d76-927f-e218d36137b1.PNG width=300> <img src=https://user-images.githubusercontent.com/1860205/147901962-aa23c82f-aeeb-4e8e-b840-e70397465f6d.PNG width=300>
+
+### Requirements
+- iOS 15 or higher
+- Info.plist - `Audio, AirPlay and Picture in Picture` in `Background Modes`. For more information, see [Apple Documentation](https://developer.apple.com/documentation/avfoundation/media_playback_and_selection/creating_a_basic_video_player_ios_and_tvos/enabling_background_audio)
+
+### At a Glance
+```swift
+class View: UIView, AVPIPKitUsable {
+
+    var pipTargetView: UIView { self } // Return the subview that you want to show.
+    var renderPolicy: AVPIPKitRenderPolicy {
+        // .once - only once render
+        // .preferredFramesPerSecond - render in frames-per-second
+    }
+}
+
+view.startPictureInPicture()
+view.stopPictureInPicture()
+
+class ViewController: UIViewController, AVPIPKitUsable {
+    var pipTargetView: UIView { view } // Return the subview that you want to show.
+
+    func start() {
+        startPictureInPicture()
+    }
+
+    func stop() {
+        stopPictureInPicture()
+    }
 }
 ```
 
