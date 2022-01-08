@@ -175,7 +175,9 @@ class ViewController: UIViewController, AVPIPUIKitUsable {
 }
 ```
 
-### Custom AVPIPKitRenderer
+## References
+
+- UIPiPDemo (https://github.com/uakihir0/UIPiPDemo)
 
 ## Authors
 
