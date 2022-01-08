@@ -9,12 +9,13 @@ import Foundation
 import QuartzCore
 import UIKit
 import AVKit
+import Combine
 
 @available(iOS 15.0, *)
 extension AVPIPKitUsable {
 
     func createVideoController() -> AVPIPKitVideoController {
-        AVPIPKitVideoController(targetView: pipTargetView, renderPolicy: renderPolicy)
+        AVPIPKitVideoController(renderer: renderer)
     }
     
 }
@@ -23,38 +24,20 @@ extension AVPIPKitUsable {
 final class PIPVideoProvider {
     
     private(set) var isRunning: Bool = false
-    
-    private(set) weak var targetView: UIView?
     private(set) var bufferDisplayLayer = AVSampleBufferDisplayLayer()
     
     private let pipContainerView = UIView()
-    private let renderPolicy: AVPIPKitRenderPolicy
-    private var preferredFramesPerSecond: Int {
-        switch renderPolicy {
-        case .once:
-            return 1
-        case .preferredFramesPerSecond(let preferredFramesPerSecond):
-            return preferredFramesPerSecond
-        }
-    }
-    private var displayLink: CADisplayLink?
-    private var targetViewSizeObservation: NSKeyValueObservation?
+    private let renderer: AVPIPKitRenderer
+    private var cancellables = Set<AnyCancellable>()
     
     deinit {
         stop()
-        targetViewSizeObservation?.invalidate()
     }
     
-    init(targetView: UIView, renderPolicy: AVPIPKitRenderPolicy) {
-        self.targetView = targetView
-        self.renderPolicy = renderPolicy
+    init(renderer: AVPIPKitRenderer) {
+        self.renderer = renderer
+    }
         
-        targetViewSizeObservation = targetView.observe(\.frame, options: [.initial, .new]) { [weak self] view, _ in
-            self?.pipContainerView.frame = view.bounds
-            self?.bufferDisplayLayer.frame = view.bounds
-        }
-    }
-    
     func start() {
         if isRunning {
             return
@@ -62,57 +45,54 @@ final class PIPVideoProvider {
         
         isRunning = true
         
-        if let window = UIApplication.shared._keyWindow, let targetView = targetView {
-            pipContainerView.frame = targetView.bounds
+        if let window = UIApplication.shared._keyWindow {
             pipContainerView.alpha = 0.0
             window.addSubview(pipContainerView)
             window.sendSubviewToBack(pipContainerView)
-            bufferDisplayLayer.frame = targetView.bounds
             bufferDisplayLayer.videoGravity = .resizeAspect
             pipContainerView.layer.addSublayer(bufferDisplayLayer)
         }
         
-        onRender()
+        let preferredFramesPerSecond = renderer.policy.preferredFramesPerSecond
+        let renderPublisher = renderer.renderPublisher
+            .receive(on: DispatchQueue.main)
+            .share()
         
-        guard case .preferredFramesPerSecond(let preferredFramesPerSecond) = renderPolicy else {
-            return
-        }
+        renderPublisher
+            .map { $0.size }
+            .removeDuplicates()
+            .map { CGRect(origin: .zero, size: $0) }
+            .sink(receiveValue: { [weak self] bounds in
+                self?.pipContainerView.frame = bounds
+                self?.bufferDisplayLayer.frame = bounds
+            })
+            .store(in: &cancellables)
         
-        displayLink = CADisplayLink(target: self, selector: #selector(onRender))
-        displayLink?.preferredFrameRateRange = CAFrameRateRange(minimum: 1, maximum: Float(preferredFramesPerSecond), preferred: 0)
-        displayLink?.add(to: .main, forMode: .default)
+        renderPublisher
+            .map { $0.cmSampleBuffer(preferredFramesPerSecond: preferredFramesPerSecond) }
+            .filter { $0 != nil }
+            .map { $0.unsafelyUnwrapped }
+            .sink(receiveValue: { [weak self] buffer in
+                if self?.bufferDisplayLayer.status == .failed {
+                    self?.bufferDisplayLayer.flush()
+                }
+                
+                self?.bufferDisplayLayer.enqueue(buffer)
+            })
+            .store(in: &cancellables)
+        
+        renderer.start()
     }
     
     func stop() {
-        displayLink?.invalidate()
-        displayLink = nil
-        pipContainerView.removeFromSuperview()
-        bufferDisplayLayer.removeFromSuperlayer()
-        isRunning = false
-    }
-    
-    // MARK: - Private
-    @objc private func onRender() {
-        if bufferDisplayLayer.status == .failed {
-            bufferDisplayLayer.flush()
-        }
-        
-        guard let buffer = targetView?.uiImage.cmSampleBuffer(preferredFramesPerSecond: preferredFramesPerSecond) else {
+        guard isRunning else {
             return
         }
-
-        bufferDisplayLayer.enqueue(buffer)
-    }
-    
-}
-
-@available(iOS 15.0, *)
-private extension UIView {
-    
-    var uiImage: UIImage {
-        UIGraphicsImageRenderer(bounds: bounds).image { context in
-            layer.render(in: context.cgContext)
-        }
+        
+        pipContainerView.removeFromSuperview()
+        bufferDisplayLayer.removeFromSuperlayer()
+        renderer.stop()
+        isRunning = false
     }
     
 }
@@ -143,12 +123,12 @@ private extension UIImage {
         
         var size = jpegData.count
         var sampleBuffer: CMSampleBuffer?
-        let nowTime = CMTime(seconds: CACurrentMediaTime(), preferredTimescale: CMTimeScale(preferredFramesPerSecond))
-        let _1_60_s = CMTime(value: 1, timescale: CMTimeScale(preferredFramesPerSecond))
+        let presentationTimeStamp = CMTime(seconds: CACurrentMediaTime(), preferredTimescale: CMTimeScale(preferredFramesPerSecond))
+        let duration = CMTime(value: 1, timescale: CMTimeScale(preferredFramesPerSecond))
         
         var timingInfo = CMSampleTimingInfo(
-            duration: _1_60_s,
-            presentationTimeStamp: nowTime,
+            duration: duration,
+            presentationTimeStamp: presentationTimeStamp,
             decodeTimeStamp: .invalid
         )
         
