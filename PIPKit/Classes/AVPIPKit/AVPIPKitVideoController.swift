@@ -29,8 +29,8 @@ final class AVPIPKitVideoController: NSObject {
         pipPossibleObservation?.invalidate()
     }
     
-    init(targetView: UIView, renderPolicy: AVPIPKitRenderPolicy) {
-        videoProvider = PIPVideoProvider(targetView: targetView, renderPolicy: renderPolicy)
+    init(renderer: AVPIPKitRenderer) {
+        videoProvider = PIPVideoProvider(renderer: renderer)
         super.init()
     }
     
@@ -74,6 +74,10 @@ final class AVPIPKitVideoController: NSObject {
     
     // MARK: - Private
     private func cachedAndPrepareAudioSession() {
+        guard AVAudioSession.sharedInstance().category != .playback else {
+            return
+        }
+        
         audioSessionCategory = AVAudioSession.sharedInstance().category
         audioSessionMode = AVAudioSession.sharedInstance().mode
         audioSessionCategoryOptions = AVAudioSession.sharedInstance().categoryOptions
@@ -123,8 +127,6 @@ final class AVPIPKitVideoController: NSObject {
                  DispatchQueue.main.async {
                      if changed.newValue == true {
                          self?.start()
-                     } else {
-                         self?.stop()
                      }
                  }
              })
