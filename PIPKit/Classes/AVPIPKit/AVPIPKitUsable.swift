@@ -48,9 +48,5 @@ public extension AVPIPKitUsable {
         AVPictureInPictureController.isPictureInPictureSupported()
     }
     
-    var renderPolicy: AVPIPKitRenderPolicy {
-        .preferredFramesPerSecond(UIScreen.main.maximumFramesPerSecond)
-    }
-    
 }
 

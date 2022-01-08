@@ -12,11 +12,16 @@ import UIKit
 public protocol AVPIPUIKitUsable: AVPIPKitUsable {
     
     var pipTargetView: UIView { get }
+    var renderPolicy: AVPIPKitRenderPolicy { get }
     
 }
 
 @available(iOS 15.0, *)
 public extension AVPIPUIKitUsable {
+    
+    var renderPolicy: AVPIPKitRenderPolicy {
+        .preferredFramesPerSecond(UIScreen.main.maximumFramesPerSecond)
+    }
     
     var renderer: AVPIPKitRenderer {
         AVPIPUIKitRenderer(targetView: pipTargetView, policy: renderPolicy)
