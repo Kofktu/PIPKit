@@ -14,6 +14,8 @@
 		CE9657662782BCAF00303B7F /* AVPIPKitVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9657652782BCAF00303B7F /* AVPIPKitVideoController.swift */; };
 		CE9657682782BEB500303B7F /* PIPKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE9972F2782A5CC002FA127 /* PIPKit.framework */; };
 		CE9657692782BEB500303B7F /* PIPKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE9972F2782A5CC002FA127 /* PIPKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CEE5C8E027899B1500BEDD03 /* AVPIPKitRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5C8DF27899B1500BEDD03 /* AVPIPKitRenderer.swift */; };
+		CEE5C8E22789A0CE00BEDD03 /* AVPIPKitUsable+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5C8E12789A0CE00BEDD03 /* AVPIPKitUsable+UIKit.swift */; };
 		CEE997332782A5CC002FA127 /* PIPKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CEE997322782A5CC002FA127 /* PIPKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEE9973E2782A5F1002FA127 /* PIPKitEventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */; };
 		CEE9973F2782A5F1002FA127 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9973B2782A5F1002FA127 /* UIWindow+Extension.swift */; };
@@ -63,6 +65,8 @@
 		CE9657612782BC3900303B7F /* UIView+Associated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Associated.swift"; sourceTree = "<group>"; };
 		CE9657632782BC9100303B7F /* AVPIPKitVideoProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitVideoProvider.swift; sourceTree = "<group>"; };
 		CE9657652782BCAF00303B7F /* AVPIPKitVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitVideoController.swift; sourceTree = "<group>"; };
+		CEE5C8DF27899B1500BEDD03 /* AVPIPKitRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitRenderer.swift; sourceTree = "<group>"; };
+		CEE5C8E12789A0CE00BEDD03 /* AVPIPKitUsable+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPIPKitUsable+UIKit.swift"; sourceTree = "<group>"; };
 		CEE9972F2782A5CC002FA127 /* PIPKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PIPKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE997322782A5CC002FA127 /* PIPKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PIPKit.h; sourceTree = "<group>"; };
 		CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PIPKitEventDispatcher.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				CE96575D2782BB6D00303B7F /* AVPIPKitUsable.swift */,
+				CEE5C8E12789A0CE00BEDD03 /* AVPIPKitUsable+UIKit.swift */,
+				CEE5C8DF27899B1500BEDD03 /* AVPIPKitRenderer.swift */,
 				CE9657632782BC9100303B7F /* AVPIPKitVideoProvider.swift */,
 				CE9657652782BCAF00303B7F /* AVPIPKitVideoController.swift */,
 			);
@@ -307,6 +313,8 @@
 				CE9657642782BC9100303B7F /* AVPIPKitVideoProvider.swift in Sources */,
 				CE9657662782BCAF00303B7F /* AVPIPKitVideoController.swift in Sources */,
 				CE9657602782BBCC00303B7F /* UIViewController+Associated.swift in Sources */,
+				CEE5C8E027899B1500BEDD03 /* AVPIPKitRenderer.swift in Sources */,
+				CEE5C8E22789A0CE00BEDD03 /* AVPIPKitUsable+UIKit.swift in Sources */,
 				CEE997412782A5F1002FA127 /* PIPUsable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,7 +504,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.kofktu.PIPKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -525,7 +533,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kr.kofktu.PIPKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

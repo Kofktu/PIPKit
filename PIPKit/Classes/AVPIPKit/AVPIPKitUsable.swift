@@ -18,10 +18,23 @@ public enum AVPIPKitRenderPolicy {
 }
 
 @available(iOS 15.0, *)
+extension AVPIPKitRenderPolicy {
+    
+    var preferredFramesPerSecond: Int {
+        switch self {
+        case .once:
+            return 1
+        case .preferredFramesPerSecond(let preferredFramesPerSecond):
+            return preferredFramesPerSecond
+        }
+    }
+    
+}
+
+@available(iOS 15.0, *)
 public protocol AVPIPKitUsable {
     
-    var pipTargetView: UIView { get }
-    var renderPolicy: AVPIPKitRenderPolicy { get }
+    var renderer: AVPIPKitRenderer { get }
     
     func startPictureInPicture()
     func stopPictureInPicture()
@@ -35,58 +48,5 @@ public extension AVPIPKitUsable {
         AVPictureInPictureController.isPictureInPictureSupported()
     }
     
-    var renderPolicy: AVPIPKitRenderPolicy {
-        .preferredFramesPerSecond(UIScreen.main.maximumFramesPerSecond)
-    }
-    
 }
 
-@available(iOS 15.0, *)
-public extension AVPIPKitUsable where Self: UIViewController {
-    
-    func startPictureInPicture() {
-        setupIfNeeded()
-        videoController?.start()
-    }
-    
-    func stopPictureInPicture() {
-        assert(videoController != nil)
-        videoController?.stop()
-    }
-    
-    // MARK: - Private
-    private func setupIfNeeded() {
-        guard videoController == nil else {
-            return
-        }
-        
-        videoController = createVideoController()
-    }
-    
-}
-
-@available(iOS 15.0, *)
-public extension AVPIPKitUsable where Self: UIView {
-    
-    var pipTargetView: UIView { self }
-    
-    func startPictureInPicture() {
-        setupIfNeeded()
-        videoController?.start()
-    }
-    
-    func stopPictureInPicture() {
-        assert(videoController != nil)
-        videoController?.stop()
-    }
-    
-    // MARK: - Private
-    private func setupIfNeeded() {
-        guard videoController == nil else {
-            return
-        }
-        
-        videoController = createVideoController()
-    }
-    
-}

@@ -182,7 +182,7 @@ class PIPXibViewController: UIViewController, PIPUsable {
 }
 
 @available(iOS 15.0, *)
-extension ViewController: AVPIPKitUsable {
+extension ViewController: AVPIPUIKitUsable {
     
     var pipTargetView: UIView {
         view

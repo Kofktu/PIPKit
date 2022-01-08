@@ -40,7 +40,7 @@ Once you have your Swift package set up, adding `PIPKit` as a dependency is as e
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.0"))
+  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.1"))
 ]
 ```
 
@@ -133,8 +133,24 @@ UIView that is capable of Picture-in-Picture in iOS (AVKit.framework)
 - Info.plist - `Audio, AirPlay and Picture in Picture` in `Background Modes`. For more information, see [Apple Documentation](https://developer.apple.com/documentation/avfoundation/media_playback_and_selection/creating_a_basic_video_player_ios_and_tvos/enabling_background_audio)
 
 ### At a Glance
+
+#### AVPIPKitRenderer
+
 ```swift
-class View: UIView, AVPIPKitUsable {
+protocol AVPIPKitRenderer {
+    
+    var policy: AVPIPKitRenderPolicy { get }
+    var renderPublisher: AnyPublisher<UIImage, Never> { get }
+    
+    func start()
+    func stop()
+    
+}
+```
+
+#### AVPIPUIKitUsable
+```swift
+class View: UIView, AVPIPUIKitUsable {
 
     var pipTargetView: UIView { self } // Return the subview that you want to show.
     var renderPolicy: AVPIPKitRenderPolicy {
@@ -146,7 +162,7 @@ class View: UIView, AVPIPKitUsable {
 view.startPictureInPicture()
 view.stopPictureInPicture()
 
-class ViewController: UIViewController, AVPIPKitUsable {
+class ViewController: UIViewController, AVPIPUIKitUsable {
     var pipTargetView: UIView { view } // Return the subview that you want to show.
 
     func start() {
@@ -158,6 +174,8 @@ class ViewController: UIViewController, AVPIPKitUsable {
     }
 }
 ```
+
+### Custom AVPIPKitRenderer
 
 ## Authors
 
