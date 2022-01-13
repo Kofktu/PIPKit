@@ -9,6 +9,18 @@ import Foundation
 import UIKit
 import AVKit
 
+public extension PIPKit {
+ 
+    static var isAVPIPKitSupported: Bool {
+        guard #available(iOS 15.0, *) else {
+            return false
+        }
+        
+        return AVPictureInPictureController.isPictureInPictureSupported()
+    }
+     
+}
+
 @available(iOS 15.0, *)
 public enum AVPIPKitRenderPolicy {
     
@@ -45,7 +57,7 @@ public protocol AVPIPKitUsable {
 public extension AVPIPKitUsable {
     
     var isAVKitPIPSupported: Bool {
-        AVPictureInPictureController.isPictureInPictureSupported()
+        PIPKit.isAVPIPKitSupported
     }
     
 }
