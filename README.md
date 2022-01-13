@@ -40,7 +40,7 @@ Once you have your Swift package set up, adding `PIPKit` as a dependency is as e
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.1"))
+  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.2"))
 ]
 ```
 
@@ -133,6 +133,10 @@ UIView that is capable of Picture-in-Picture in iOS (AVKit.framework)
 - Info.plist - `Audio, AirPlay and Picture in Picture` in `Background Modes`. For more information, see [Apple Documentation](https://developer.apple.com/documentation/avfoundation/media_playback_and_selection/creating_a_basic_video_player_ios_and_tvos/enabling_background_audio)
 
 ### At a Glance
+
+```swift
+var PIPKit.isAVPIPKitSupported: Bool
+```
 
 #### AVPIPKitRenderer
 
