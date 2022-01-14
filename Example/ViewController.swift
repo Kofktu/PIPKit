@@ -8,8 +8,14 @@
 import UIKit
 import PIPKit
 
+#if canImport(Combine)
+import Combine
+#endif
+
 class ViewController: UIViewController {
 
+    private var cancellables: Any?
+    
     class func viewController() -> ViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController else {
@@ -69,6 +75,14 @@ class ViewController: UIViewController {
             return
         }
         
+        var cancellables = Set<AnyCancellable>()
+        exitPublisher
+            .sink(receiveValue: {
+                print("exit")
+            })
+            .store(in: &cancellables)
+        
+        self.cancellables = cancellables
         startPictureInPicture()
     }
     

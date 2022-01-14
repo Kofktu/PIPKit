@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import AVKit
 import AVFoundation
+import Combine
 
 @available(iOS 15.0, *)
 final class AVPIPKitVideoController: NSObject {
@@ -132,9 +133,10 @@ final class AVPIPKitVideoController: NSObject {
              })
     }
     
-    private func clearPIPController() {
+    private func exitPIPController() {
         pipPossibleObservation?.invalidate()
         pipController = nil
+        videoProvider.renderer.exit()
     }
     
 }
@@ -147,7 +149,7 @@ extension AVPIPKitVideoController: AVPictureInPictureControllerDelegate {
     }
     
     func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        clearPIPController()
+        exitPIPController()
     }
     
 }

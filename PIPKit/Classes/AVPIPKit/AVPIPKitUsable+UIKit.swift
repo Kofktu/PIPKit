@@ -7,12 +7,14 @@
 
 import Foundation
 import UIKit
+import Combine
 
 @available(iOS 15.0, *)
 public protocol AVPIPUIKitUsable: AVPIPKitUsable {
     
     var pipTargetView: UIView { get }
     var renderPolicy: AVPIPKitRenderPolicy { get }
+    var exitPublisher: AnyPublisher<Void, Never> { get }
     
 }
 
@@ -23,16 +25,20 @@ public extension AVPIPUIKitUsable {
         .preferredFramesPerSecond(UIScreen.main.maximumFramesPerSecond)
     }
     
-    var renderer: AVPIPKitRenderer {
-        AVPIPUIKitRenderer(targetView: pipTargetView, policy: renderPolicy)
-    }
-    
 }
 
 @available(iOS 15.0, *)
 public extension AVPIPUIKitUsable where Self: UIViewController {
     
     var pipTargetView: UIView { view }
+    var renderer: AVPIPKitRenderer {
+        setupRendererIfNeeded()
+        return avUIKitRenderer.unsafelyUnwrapped
+    }
+    var exitPublisher: AnyPublisher<Void, Never> {
+        setupRendererIfNeeded()
+        return avUIKitRenderer.unsafelyUnwrapped.exitPublisher
+    }
     
     func startPictureInPicture() {
         setupIfNeeded()
@@ -45,6 +51,14 @@ public extension AVPIPUIKitUsable where Self: UIViewController {
     }
     
     // MARK: - Private
+    private func setupRendererIfNeeded() {
+        guard avUIKitRenderer == nil else {
+            return
+        }
+        
+        avUIKitRenderer = AVPIPUIKitRenderer(targetView: pipTargetView, policy: renderPolicy)
+    }
+    
     private func setupIfNeeded() {
         guard videoController == nil else {
             return
@@ -59,6 +73,14 @@ public extension AVPIPUIKitUsable where Self: UIViewController {
 public extension AVPIPUIKitUsable where Self: UIView {
     
     var pipTargetView: UIView { self }
+    var renderer: AVPIPKitRenderer {
+        setupRendererIfNeeded()
+        return avUIKitRenderer.unsafelyUnwrapped
+    }
+    var exitPublisher: AnyPublisher<Void, Never> {
+        setupRendererIfNeeded()
+        return avUIKitRenderer.unsafelyUnwrapped.exitPublisher
+    }
     
     func startPictureInPicture() {
         setupIfNeeded()
@@ -71,6 +93,14 @@ public extension AVPIPUIKitUsable where Self: UIView {
     }
     
     // MARK: - Private
+    private func setupRendererIfNeeded() {
+        guard avUIKitRenderer == nil else {
+            return
+        }
+        
+        avUIKitRenderer = AVPIPUIKitRenderer(targetView: pipTargetView, policy: renderPolicy)
+    }
+    
     private func setupIfNeeded() {
         guard videoController == nil else {
             return

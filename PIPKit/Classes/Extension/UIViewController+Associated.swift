@@ -12,12 +12,19 @@ extension UIViewController {
     
     enum AssociatedKeys {
         static var pipEventDispatcher = "pipEventDispatcher"
+        static var avUIKitRenderer = "avUIKitRenderer"
         static var pipVideoController = "PIPVideoController"
     }
     
     var pipEventDispatcher: PIPKitEventDispatcher? {
         get { return objc_getAssociatedObject(self, &AssociatedKeys.pipEventDispatcher) as? PIPKitEventDispatcher }
         set { objc_setAssociatedObject(self, &AssociatedKeys.pipEventDispatcher, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
+    }
+    
+    @available(iOS 15.0, *)
+    var avUIKitRenderer: AVPIPUIKitRenderer? {
+        get { return objc_getAssociatedObject(self, &AssociatedKeys.avUIKitRenderer) as? AVPIPUIKitRenderer }
+        set { objc_setAssociatedObject(self, &AssociatedKeys.avUIKitRenderer, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
     @available(iOS 15.0, *)

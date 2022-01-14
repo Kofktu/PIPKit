@@ -17,6 +17,7 @@ public protocol AVPIPKitRenderer {
     
     func start()
     func stop()
+    func exit()
     
 }
 
@@ -27,11 +28,15 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
     var renderPublisher: AnyPublisher<UIImage, Never> {
         render.eraseToAnyPublisher()
     }
+    var exitPublisher: AnyPublisher<Void, Never> {
+        _exit.eraseToAnyPublisher()
+    }
     
     private var isRunning: Bool = false
     private weak var targetView: UIView?
     private var displayLink: CADisplayLink?
     private let render = PassthroughSubject<UIImage, Never>()
+    private let _exit = PassthroughSubject<Void, Never>()
     
     deinit {
         stop()
@@ -67,6 +72,10 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
         displayLink?.invalidate()
         displayLink = nil
         isRunning = false
+    }
+    
+    func exit() {
+        _exit.send(())
     }
     
     // MARK: - Private
