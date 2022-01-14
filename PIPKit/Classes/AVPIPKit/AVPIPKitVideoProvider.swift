@@ -25,9 +25,9 @@ final class PIPVideoProvider {
     
     private(set) var isRunning: Bool = false
     private(set) var bufferDisplayLayer = AVSampleBufferDisplayLayer()
+    private(set) var renderer: AVPIPKitRenderer
     
     private let pipContainerView = UIView()
-    private let renderer: AVPIPKitRenderer
     private var cancellables = Set<AnyCancellable>()
     
     deinit {
@@ -50,6 +50,7 @@ final class PIPVideoProvider {
             pipContainerView.alpha = 0.0
             window.addSubview(pipContainerView)
             window.sendSubviewToBack(pipContainerView)
+            bufferDisplayLayer.backgroundColor = UIColor.clear.cgColor
             bufferDisplayLayer.videoGravity = .resizeAspect
             pipContainerView.layer.addSublayer(bufferDisplayLayer)
         }
