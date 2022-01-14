@@ -40,7 +40,7 @@ Once you have your Swift package set up, adding `PIPKit` as a dependency is as e
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.3"))
+  .package(url: "https://github.com/Kofktu/PIPKit.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
