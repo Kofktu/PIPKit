@@ -16,6 +16,9 @@ public protocol AVPIPUIKitUsable: AVPIPKitUsable {
     var renderPolicy: AVPIPKitRenderPolicy { get }
     var exitPublisher: AnyPublisher<Void, Never> { get }
     
+    // If you want to update the screen, execute the following additional code.
+    func renderPictureInPicture()
+    
 }
 
 @available(iOS 15.0, *)
@@ -48,6 +51,11 @@ public extension AVPIPUIKitUsable where Self: UIViewController {
     func stopPictureInPicture() {
         assert(videoController != nil)
         videoController?.stop()
+    }
+    
+    func renderPictureInPicture() {
+        setupRendererIfNeeded()
+        avUIKitRenderer?.render()
     }
     
     // MARK: - Private
