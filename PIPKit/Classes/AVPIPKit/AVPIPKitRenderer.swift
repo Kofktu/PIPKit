@@ -26,7 +26,7 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
     
     let policy: AVPIPKitRenderPolicy
     var renderPublisher: AnyPublisher<UIImage, Never> {
-        render.eraseToAnyPublisher()
+        _render.eraseToAnyPublisher()
     }
     var exitPublisher: AnyPublisher<Void, Never> {
         _exit.eraseToAnyPublisher()
@@ -35,7 +35,7 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
     private var isRunning: Bool = false
     private weak var targetView: UIView?
     private var displayLink: CADisplayLink?
-    private let render = PassthroughSubject<UIImage, Never>()
+    private let _render = PassthroughSubject<UIImage, Never>()
     private let _exit = PassthroughSubject<Void, Never>()
     
     deinit {
@@ -78,6 +78,10 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
         _exit.send(())
     }
     
+    func render() {
+        onRender()
+    }
+    
     // MARK: - Private
     @objc private func onRender() {
         guard let targetView = targetView else {
@@ -85,7 +89,7 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
             return
         }
         
-        render.send(targetView.uiImage)
+        _render.send(targetView.uiImage)
     }
     
 }
