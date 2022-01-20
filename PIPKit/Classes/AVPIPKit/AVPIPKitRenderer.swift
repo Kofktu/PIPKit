@@ -26,7 +26,10 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
     
     let policy: AVPIPKitRenderPolicy
     var renderPublisher: AnyPublisher<UIImage, Never> {
-        _render.eraseToAnyPublisher()
+        _render
+            .filter { $0 != nil }
+            .map { $0.unsafelyUnwrapped }
+            .eraseToAnyPublisher()
     }
     var exitPublisher: AnyPublisher<Void, Never> {
         _exit.eraseToAnyPublisher()
@@ -35,7 +38,7 @@ final class AVPIPUIKitRenderer: AVPIPKitRenderer {
     private var isRunning: Bool = false
     private weak var targetView: UIView?
     private var displayLink: CADisplayLink?
-    private let _render = PassthroughSubject<UIImage, Never>()
+    private let _render = CurrentValueSubject<UIImage?, Never>(nil)
     private let _exit = PassthroughSubject<Void, Never>()
     
     deinit {
