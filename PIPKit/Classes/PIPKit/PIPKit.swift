@@ -70,7 +70,15 @@ public final class PIPKit {
             return
         }
         
-        let newWindow = PIPKitWindow()
+        let newWindow: PIPKitWindow
+        
+        if #available(iOS 13.0, *),
+           let currentWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            newWindow = PIPKitWindow(windowScene: currentWindowScene)
+        } else {
+            newWindow = PIPKitWindow()
+        }
+        
         newWindow.backgroundColor = .clear
         newWindow.rootViewController = viewController
         newWindow.windowLevel = .alert
