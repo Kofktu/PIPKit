@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iqI-Wn-itj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iqI-Wn-itj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,15 +70,28 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TextField" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M76-F9-DnK">
+                                <rect key="frame" x="107" y="256" width="200" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="0ho-LD-S3k"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="F5k-hO-pJi"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="USO-Za-4e6" firstAttribute="top" secondItem="M76-F9-DnK" secondAttribute="bottom" constant="50" id="AGW-Dr-qHZ"/>
                             <constraint firstItem="USO-Za-4e6" firstAttribute="centerX" secondItem="F5k-hO-pJi" secondAttribute="centerX" id="VcO-4A-bI9"/>
                             <constraint firstItem="USO-Za-4e6" firstAttribute="centerY" secondItem="F5k-hO-pJi" secondAttribute="centerY" id="Y4I-rt-Hfw"/>
+                            <constraint firstItem="M76-F9-DnK" firstAttribute="centerX" secondItem="F5k-hO-pJi" secondAttribute="centerX" id="aWA-UV-j61"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Eh-pi-ceX"/>
+                    <connections>
+                        <outlet property="textField" destination="M76-F9-DnK" id="SrI-Gq-sKA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Lc-Mq-hEg" sceneMemberID="firstResponder"/>
             </objects>

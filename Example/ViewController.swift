@@ -14,6 +14,8 @@ import Combine
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var textField: UITextField!
+    
     private var cancellables: Any?
     
     class func viewController() -> ViewController {
@@ -29,6 +31,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         title = "PIPKit"
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        textField.resignFirstResponder()
     }
     
     // MARK: - Private
