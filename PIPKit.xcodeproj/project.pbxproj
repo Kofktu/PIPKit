@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE21D48128AA8CF900057736 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21D48028AA8CF900057736 /* KeyboardObserver.swift */; };
 		CE96575E2782BB6D00303B7F /* AVPIPKitUsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96575D2782BB6D00303B7F /* AVPIPKitUsable.swift */; };
 		CE9657602782BBCC00303B7F /* UIViewController+Associated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96575F2782BBCC00303B7F /* UIViewController+Associated.swift */; };
 		CE9657622782BC3900303B7F /* UIView+Associated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9657612782BC3900303B7F /* UIView+Associated.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE21D48028AA8CF900057736 /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		CE96575D2782BB6D00303B7F /* AVPIPKitUsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPIPKitUsable.swift; sourceTree = "<group>"; };
 		CE96575F2782BBCC00303B7F /* UIViewController+Associated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Associated.swift"; sourceTree = "<group>"; };
 		CE9657612782BC3900303B7F /* UIView+Associated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Associated.swift"; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				CEE9973C2782A5F1002FA127 /* PIPKit.swift */,
 				CEE9973D2782A5F1002FA127 /* PIPUsable.swift */,
 				CEE9973A2782A5F1002FA127 /* PIPKitEventDispatcher.swift */,
+				CE21D48028AA8CF900057736 /* KeyboardObserver.swift */,
 			);
 			path = PIPKit;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				CE9657602782BBCC00303B7F /* UIViewController+Associated.swift in Sources */,
 				CEE5C8E027899B1500BEDD03 /* AVPIPKitRenderer.swift in Sources */,
 				CEE5C8E22789A0CE00BEDD03 /* AVPIPKitUsable+UIKit.swift in Sources */,
+				CE21D48128AA8CF900057736 /* KeyboardObserver.swift in Sources */,
 				CEE997412782A5F1002FA127 /* PIPUsable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
