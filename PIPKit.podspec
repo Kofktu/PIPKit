@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PIPKit'
-  s.version          = '1.0.7'
+  s.version          = '1.1.0'
   s.summary          = 'PIP(Picture in Picture) for iOS'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Picture in Picture to UIViewController
   s.source           = { :git => 'https://github.com/Kofktu/PIPKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '12.0'
   s.swift_version = '5.0'
 
   s.source_files = 'PIPKit/Classes/**/*'
