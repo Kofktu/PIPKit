@@ -20,13 +20,36 @@ public struct PIPShadow {
 
 public struct PIPCorner {
     public let radius: CGFloat
-    public let curve: CALayerCornerCurve?
+    public let curve: Any?
     
-    public init(radius: CGFloat,
-                curve: CALayerCornerCurve? = nil) {
+    public init(radius: CGFloat) {
+        self.radius = radius
+        self.curve = nil
+    }
+    
+    @available(iOS 13.0, *)
+    public init(
+        radius: CGFloat,
+        curve: CALayerCornerCurve? = nil
+    ) {
         self.radius = radius
         self.curve = curve
     }
+    
+    func apply(view: UIView) {
+        view.clipsToBounds = radius > .zero
+        view.layer.cornerRadius = radius
+        
+        guard
+            #available(iOS 13.0, *),
+            let curve = curve as? CALayerCornerCurve
+        else {
+            return
+        }
+        
+        view.layer.cornerCurve = curve
+    }
+    
 }
 
 public enum PIPState {

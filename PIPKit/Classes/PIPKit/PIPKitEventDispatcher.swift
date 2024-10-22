@@ -99,12 +99,7 @@ final class PIPKitEventDispatcher {
         }
         
         if let pipCorner = rootViewController?.pipCorner {
-            rootViewController?.view.layer.cornerRadius = pipCorner.radius
-            if let curve = pipCorner.curve {
-                if #available(iOS 13.0, *) {
-                    rootViewController?.view.layer.cornerCurve = curve
-                }
-            }
+            rootViewController.flatMap { pipCorner.apply(view: $0.view) }
         }
         
         deviceNotificationObserver = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification,
