@@ -24,7 +24,7 @@ public extension PIPUsable {
         if #available(iOS 13.0, *) {
             return PIPCorner(radius: 6, curve: .continuous)
         } else {
-            return PIPCorner(radius: 6, curve: nil)
+            return PIPCorner(radius: 6)
         }
     }
     func didChangedState(_ state: PIPState) {}

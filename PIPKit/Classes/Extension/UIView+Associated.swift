@@ -11,13 +11,13 @@ import UIKit
 extension UIView {
     
     enum AssociatedKeys {
-        static var avUIKitRenderer = "avUIKitRenderer"
-        static var pipVideoController = "PIPVideoController"
+        static var avUIKitRenderer: Void?
+        static var pipVideoController: Void?
     }
     
     @available(iOS 15.0, *)
     var avUIKitRenderer: AVPIPUIKitRenderer? {
-        get { return objc_getAssociatedObject(self, &AssociatedKeys.avUIKitRenderer) as? AVPIPUIKitRenderer }
+        get { objc_getAssociatedObject(self, &AssociatedKeys.avUIKitRenderer) as? AVPIPUIKitRenderer }
         set { objc_setAssociatedObject(self, &AssociatedKeys.avUIKitRenderer, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }
     
