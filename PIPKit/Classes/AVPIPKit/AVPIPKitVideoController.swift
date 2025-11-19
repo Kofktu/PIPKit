@@ -30,8 +30,12 @@ final class AVPIPKitVideoController: NSObject {
         pipPossibleObservation?.invalidate()
     }
     
-    init(renderer: AVPIPKitRenderer) {
-        videoProvider = PIPVideoProvider(renderer: renderer)
+    init(renderer: AVPIPKitRenderer, audioSessionCategory: AVAudioSession.Category) {
+        videoProvider = PIPVideoProvider(
+            renderer: renderer,
+            audioSessionCategory: audioSessionCategory
+        )
+        
         super.init()
     }
     
@@ -75,16 +79,21 @@ final class AVPIPKitVideoController: NSObject {
     
     // MARK: - Private
     private func cachedAndPrepareAudioSession() {
-        guard AVAudioSession.sharedInstance().category != .playback else {
+        guard AVAudioSession.sharedInstance().category != videoProvider.pipAudioSessionCategory else {
             return
         }
+        
+        assert(
+            videoProvider.pipAudioSessionCategory == .playback ||
+            videoProvider.pipAudioSessionCategory == .playAndRecord, "`pipAudioSessionCategory` supports only `.playback` or `.playAndRecord`."
+        )
         
         audioSessionCategory = AVAudioSession.sharedInstance().category
         audioSessionMode = AVAudioSession.sharedInstance().mode
         audioSessionCategoryOptions = AVAudioSession.sharedInstance().categoryOptions
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setCategory(videoProvider.pipAudioSessionCategory, mode: .default)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {}
     }
@@ -120,6 +129,10 @@ final class AVPIPKitVideoController: NSObject {
                 playbackDelegate: self
             )
         )
+        
+        pipController?.requiresLinearPlayback = true
+//        pipController?.setValue(1, forKey: "controlsStyle")
+        
         pipController?.delegate = self
         pipPossibleObservation = pipController?.observe(
             \AVPictureInPictureController.isPictureInPicturePossible,

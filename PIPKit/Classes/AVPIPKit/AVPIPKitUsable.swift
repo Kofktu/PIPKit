@@ -48,6 +48,9 @@ public protocol AVPIPKitUsable {
     
     var renderer: AVPIPKitRenderer { get }
     
+    /// `pipAudioSessionCategory` supports only `.playback` or `.playAndRecord`.
+    var pipAudioSessionCategory: AVAudioSession.Category { get }
+    
     func startPictureInPicture()
     func stopPictureInPicture()
     
@@ -59,6 +62,8 @@ public extension AVPIPKitUsable {
     var isAVKitPIPSupported: Bool {
         PIPKit.isAVPIPKitSupported
     }
+    
+    var pipAudioSessionCategory: AVAudioSession.Category { .playback }
     
 }
 

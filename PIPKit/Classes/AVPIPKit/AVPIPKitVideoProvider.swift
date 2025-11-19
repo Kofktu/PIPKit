@@ -15,7 +15,10 @@ import Combine
 extension AVPIPKitUsable {
 
     func createVideoController() -> AVPIPKitVideoController {
-        AVPIPKitVideoController(renderer: renderer)
+        AVPIPKitVideoController(
+            renderer: renderer,
+            audioSessionCategory: pipAudioSessionCategory
+        )
     }
     
 }
@@ -25,7 +28,8 @@ final class PIPVideoProvider {
     
     private(set) var isRunning: Bool = false
     private(set) var bufferDisplayLayer = AVSampleBufferDisplayLayer()
-    private(set) var renderer: AVPIPKitRenderer
+    let renderer: AVPIPKitRenderer
+    let pipAudioSessionCategory: AVAudioSession.Category
     
     private let pipContainerView = UIView()
     private var cancellables = Set<AnyCancellable>()
@@ -34,8 +38,9 @@ final class PIPVideoProvider {
         stop()
     }
     
-    init(renderer: AVPIPKitRenderer) {
+    init(renderer: AVPIPKitRenderer, audioSessionCategory: AVAudioSession.Category) {
         self.renderer = renderer
+        self.pipAudioSessionCategory = audioSessionCategory
     }
         
     func start() {
